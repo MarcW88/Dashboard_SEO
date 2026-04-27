@@ -339,45 +339,129 @@
 <div id="tab-data" class="tab-content">
 <div class="content">
 
-  <div class="int-card">
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
-      <span class="int-badge">CONNECTED</span>
-      <strong>Google Search Console</strong>
-    </div>
-    <div class="g2">
-      <div class="card" style="margin:0">
-        <div class="card-title" style="margin-bottom:10px">Clicks &amp; Impressions</div>
-        <canvas id="chartGSC" height="100"></canvas>
+  <!-- ═══ SECTION 1 : GSC ═══ -->
+  <div class="section-sep">Google Search Console — Evolution du trafic générique</div>
+
+  <!-- 1.1 Line Chart + 2 dark KPI cards -->
+  <div class="card">
+    <div class="card-hdr">
+      <div>
+        <div class="card-title">Url Clicks — Trend</div>
+        <div class="card-sub">Current period vs previous year (dotted)</div>
       </div>
-      <div class="card" style="margin:0">
-        <div class="card-title" style="margin-bottom:10px">Top Queries</div>
-        <table>
-          <thead><tr><th>Query</th><th>Clicks</th><th>Impr.</th><th>CTR</th><th>Pos.</th></tr></thead>
-          <tbody>
-            <tr><td>equans belgium</td><td>820</td><td>4,100</td><td>20%</td><td>1.2</td></tr>
-            <tr><td>facility management</td><td>340</td><td>12,400</td><td>2.7%</td><td>8.4</td></tr>
-            <tr><td>building automation</td><td>180</td><td>6,200</td><td>2.9%</td><td>6.1</td></tr>
-            <tr><td>hvac onderhoud</td><td>120</td><td>3,800</td><td>3.2%</td><td>7.2</td></tr>
-            <tr><td>energietransitie bedrijven</td><td>85</td><td>2,900</td><td>2.9%</td><td>9.8</td></tr>
-          </tbody>
-        </table>
+      <div style="display:flex;gap:8px;align-items:center">
+        <select class="sel"><option>Last 8 weeks</option></select>
+      </div>
+    </div>
+    <div class="legend-row" id="gscTrendLeg"></div>
+    <canvas id="chartGSCtrend" height="80"></canvas>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+    <div style="background:#2d2d2d;border-radius:10px;padding:18px 20px">
+      <div style="font-size:10px;font-weight:600;color:#999;text-transform:uppercase;letter-spacing:.3px;margin-bottom:6px">Impressions</div>
+      <div style="font-size:28px;font-weight:800;color:#fff">374,363</div>
+      <div style="font-size:11px;color:#ef5350;font-weight:600;margin-top:4px">&#9660; -21.7%</div>
+    </div>
+    <div style="background:#2d2d2d;border-radius:10px;padding:18px 20px">
+      <div style="font-size:10px;font-weight:600;color:#999;text-transform:uppercase;letter-spacing:.3px;margin-bottom:6px">Url Clicks</div>
+      <div style="font-size:28px;font-weight:800;color:#fff">3,436</div>
+      <div style="font-size:11px;color:#ef5350;font-weight:600;margin-top:4px">&#9660; -38.6%</div>
+    </div>
+  </div>
+
+  <!-- 1.2 Category Table -->
+  <div class="card">
+    <div class="card-hdr">
+      <div>
+        <div class="card-title">Performance by Site Category</div>
+        <div class="card-sub">Impressions &amp; Clicks by page category — vs previous period</div>
+      </div>
+    </div>
+    <table>
+      <thead><tr><th>Catégorisation site</th><th style="text-align:right">Impressions</th><th style="text-align:right">&Delta;</th><th style="text-align:right">Url Clicks</th><th style="text-align:right">&Delta;</th></tr></thead>
+      <tbody id="catTable"></tbody>
+    </table>
+    <div style="text-align:right;font-size:10px;color:#bbb;margin-top:8px">1-9 / 9</div>
+  </div>
+
+  <!-- 1.3 Query Table -->
+  <div class="card">
+    <div class="card-hdr">
+      <div>
+        <div class="card-title">Top Queries</div>
+        <div class="card-sub">Sorted by impressions — current period vs previous</div>
+      </div>
+    </div>
+    <table>
+      <thead><tr><th>Query</th><th style="text-align:right">Impressions</th><th style="text-align:right">&Delta;</th><th style="text-align:right">Url Clicks</th><th style="text-align:right">&Delta;</th></tr></thead>
+      <tbody id="queryTable"></tbody>
+    </table>
+    <div style="text-align:right;font-size:10px;color:#bbb;margin-top:8px">1-10 / 18,271</div>
+  </div>
+
+  <!-- 1.4 Brand Cards + Landing Page Table -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+    <div style="background:#2d2d2d;border-radius:10px;padding:18px 20px">
+      <div style="font-size:10px;font-weight:600;color:#999;text-transform:uppercase;letter-spacing:.3px;margin-bottom:6px">Branded Clicks</div>
+      <div style="font-size:28px;font-weight:800;color:#fff">413</div>
+      <div style="font-size:11px;color:#ef5350;font-weight:600;margin-top:4px">&#9660; -64.5%</div>
+    </div>
+    <div style="background:#2d2d2d;border-radius:10px;padding:18px 20px">
+      <div style="font-size:10px;font-weight:600;color:#999;text-transform:uppercase;letter-spacing:.3px;margin-bottom:6px">Non-branded Clicks</div>
+      <div style="font-size:28px;font-weight:800;color:#fff">759</div>
+      <div style="font-size:11px;color:#ef5350;font-weight:600;margin-top:4px">&#9660; -50.5%</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-hdr">
+      <div>
+        <div class="card-title">Brand vs Non-Brand — Landing Pages</div>
+        <div class="card-sub">Top landing pages by clicks — brand &amp; non-brand split</div>
+      </div>
+    </div>
+    <table>
+      <thead><tr><th>Landing Page</th><th style="text-align:right">Url Clicks</th><th style="text-align:right">&Delta;</th></tr></thead>
+      <tbody id="brandLPtable"></tbody>
+    </table>
+    <div style="text-align:right;font-size:10px;color:#bbb;margin-top:8px">1-10 / 8,206</div>
+  </div>
+
+  <!-- ═══ SECTION 2 : GA4 ═══ -->
+  <div class="section-sep">Google Analytics 4 — Evolution des sessions organiques</div>
+
+  <!-- 2.1 Bar Chart + KPI Card -->
+  <div class="g2">
+    <div class="card" style="margin:0">
+      <div class="card-hdr">
+        <div>
+          <div class="card-title">Organic Sessions — Year over Year</div>
+          <div class="card-sub">Monthly comparison: current vs previous year</div>
+        </div>
+      </div>
+      <canvas id="chartGA4bar" height="100"></canvas>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="background:#2d2d2d;border-radius:10px;padding:18px 20px;flex:1;display:flex;flex-direction:column;justify-content:center">
+        <div style="font-size:10px;font-weight:600;color:#999;text-transform:uppercase;letter-spacing:.3px;margin-bottom:6px">Organic Sessions</div>
+        <div style="font-size:32px;font-weight:800;color:#fff">4,655</div>
+        <div style="font-size:11px;color:#27ae60;font-weight:600;margin-top:4px">&#9650; +4.2%</div>
       </div>
     </div>
   </div>
-  <div class="int-card">
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
-      <span class="int-badge">CONNECTED</span>
-      <strong>Google Analytics 4</strong>
+
+  <!-- 2.2 Top Landing Pages -->
+  <div class="card">
+    <div class="card-hdr">
+      <div>
+        <div class="card-title">Top Landing Pages — Organic</div>
+        <div class="card-sub">Sorted by sessions — current period</div>
+      </div>
     </div>
-    <div class="g3">
-      <div class="card" style="margin:0"><div class="kpi-label">Organic Sessions</div><div class="kpi-val">12,840</div><div class="kpi-cmp">vs last year: <span class="up">+18%</span></div></div>
-      <div class="card" style="margin:0"><div class="kpi-label">Bounce Rate (Organic)</div><div class="kpi-val">52.1%</div><div class="kpi-cmp">vs last year: <span class="dn">+2.3 pts</span></div></div>
-      <div class="card" style="margin:0"><div class="kpi-label">Organic Conversions</div><div class="kpi-val">284</div><div class="kpi-cmp">vs last year: <span class="up">+22%</span></div></div>
-    </div>
-    <div class="card">
-      <div class="card-title" style="margin-bottom:10px">Organic Sessions Trend</div>
-      <canvas id="chartGA4" height="70"></canvas>
-    </div>
+    <table>
+      <thead><tr><th>Page de destination</th><th style="text-align:right">Sessions</th><th style="text-align:right">&Delta;</th></tr></thead>
+      <tbody id="ga4LPtable"></tbody>
+    </table>
+    <div style="text-align:right;font-size:10px;color:#bbb;margin-top:8px">1-14 / 3,622</div>
   </div>
 
 </div>
@@ -579,18 +663,123 @@ new Chart(document.getElementById('chartRadar2'),{
 // ══════════════════════════════════════════
 // TAB 2 — CONNECTED DATA
 // ══════════════════════════════════════════
-new Chart(document.getElementById('chartGSC'),{
+
+// Helper: delta cell
+function deltaCell(v){
+  if(v===0) return '<td style="text-align:right;color:#aaa">—</td>';
+  const col=v>0?'#27ae60':'#ef5350';
+  const arr=v>0?'&#9650;':'&#9660;';
+  return `<td style="text-align:right;color:${col};font-weight:600">${arr} ${v>0?'+':''}${v.toFixed(1)}%</td>`;
+}
+
+// 1.1 GSC Line Chart — Url Clicks current vs previous year
+const gscWeeks=['1 Mar','8 Mar','15 Mar','22 Mar','29 Mar','5 Apr','12 Apr','19 Apr','25 Apr'];
+const gscCurrent=[120,135,148,110,165,142,128,155,98];
+const gscPrev=[180,195,172,210,188,205,192,178,160];
+const gscLeg=document.getElementById('gscTrendLeg');
+gscLeg.innerHTML=`<span><span class="ldot" style="background:${C.orange}"></span>Url Clicks — current</span><span><span class="ldot" style="background:#bbb"></span>Url Clicks — previous year</span>`;
+new Chart(document.getElementById('chartGSCtrend'),{
   type:'line',
-  data:{labels:months,datasets:[
-    {label:'Clicks',data:[420,480,520,580,640,710,780,850,920,980,1050,1120,1180],borderColor:C.green,borderWidth:2,tension:.35,pointRadius:2,fill:false},
-    {label:'Impressions (k)',data:[18,22,26,30,34,38,42,46,50,54,58,62,66],borderColor:C.pink,borderWidth:2,tension:.35,pointRadius:2,borderDash:[4,3],fill:false,yAxisID:'y1'},
+  data:{labels:gscWeeks,datasets:[
+    {label:'Current',data:gscCurrent,borderColor:C.orange,backgroundColor:'rgba(232,168,56,.08)',borderWidth:2.5,tension:.4,pointRadius:2,fill:true},
+    {label:'Previous year',data:gscPrev,borderColor:'#bbb',borderWidth:2,tension:.4,pointRadius:2,borderDash:[4,3],fill:false},
   ]},
-  options:{plugins:{legend:{labels:{font:{size:10},boxWidth:10}},datalabels:{display:false}},scales:{y:{ticks:{font:{size:10}},grid:{color:'#ebe6dc'}},y1:{position:'right',ticks:{font:{size:10},callback:v=>v+'k'},grid:{display:false}},x:{ticks:{font:{size:10}},grid:{display:false}}}}
+  options:{plugins:{legend:{display:false},datalabels:{display:false}},scales:{y:{ticks:{font:{size:9}},grid:{color:'#ebe6dc'}},x:{ticks:{font:{size:9}},grid:{display:false}}}}
 });
-new Chart(document.getElementById('chartGA4'),{
-  type:'line',
-  data:{labels:months,datasets:[{label:'Organic Sessions',data:[680,780,880,960,1040,1120,1200,1280,1360,1440,1520,1600,1680],borderColor:C.orange,backgroundColor:'rgba(232,168,56,.1)',borderWidth:2,tension:.35,pointRadius:2,fill:true}]},
-  options:{plugins:{legend:{display:false},datalabels:{display:false}},scales:{y:{ticks:{font:{size:10}},grid:{color:'#ebe6dc'}},x:{ticks:{font:{size:10}},grid:{display:false}}}}
+
+// 1.2 Category Table
+const catData=[
+  {name:'Homepage',impr:142500,dImpr:-18.2,clicks:1420,dClicks:-32.1},
+  {name:'Facility Management',impr:68200,dImpr:-12.5,clicks:645,dClicks:-28.4},
+  {name:'Digital Building',impr:52100,dImpr:-25.8,clicks:412,dClicks:-41.2},
+  {name:'Industry & Infra',impr:38400,dImpr:-15.3,clicks:298,dClicks:-35.6},
+  {name:'Carbon & Energy',impr:28600,dImpr:-31.2,clicks:186,dClicks:-52.8},
+  {name:'HVAC & Maintenance',impr:18900,dImpr:-8.4,clicks:195,dClicks:-22.1},
+  {name:'Careers',impr:12400,dImpr:+4.2,clicks:142,dClicks:+8.6},
+  {name:'Blog / Insights',impr:8200,dImpr:-42.1,clicks:78,dClicks:-55.3},
+  {name:'Contact',impr:5063,dImpr:-6.8,clicks:60,dClicks:-12.4},
+];
+const ct=document.getElementById('catTable');
+catData.forEach(d=>{
+  ct.innerHTML+=`<tr><td><strong>${d.name}</strong></td><td style="text-align:right">${d.impr.toLocaleString()}</td>${deltaCell(d.dImpr)}<td style="text-align:right">${d.clicks.toLocaleString()}</td>${deltaCell(d.dClicks)}</tr>`;
+});
+
+// 1.3 Query Table
+const queryData=[
+  {q:'equans belgium',impr:28400,dImpr:-12.1,clicks:824,dClicks:-18.5},
+  {q:'facility management belgium',impr:22100,dImpr:-15.8,clicks:385,dClicks:-32.4},
+  {q:'gebouwbeheer brussel',impr:18600,dImpr:-8.2,clicks:248,dClicks:-22.1},
+  {q:'building automation',impr:15200,dImpr:-28.4,clicks:195,dClicks:-41.8},
+  {q:'hvac onderhoud',impr:12800,dImpr:-5.6,clicks:186,dClicks:-14.2},
+  {q:'energietransitie bedrijven',impr:9400,dImpr:-35.2,clicks:124,dClicks:-48.6},
+  {q:'technisch gebouwbeheer',impr:8200,dImpr:-18.9,clicks:118,dClicks:-26.3},
+  {q:'warmtepomp installatie',impr:6800,dImpr:+12.4,clicks:98,dClicks:+8.2},
+  {q:'datacenter koeling',impr:4200,dImpr:-22.6,clicks:64,dClicks:-38.1},
+  {q:'smart building technology',impr:3600,dImpr:-14.8,clicks:42,dClicks:-25.5},
+];
+const qt=document.getElementById('queryTable');
+let qTotImpr=0,qTotClicks=0;
+queryData.forEach(d=>{
+  qTotImpr+=d.impr;qTotClicks+=d.clicks;
+  qt.innerHTML+=`<tr><td>${d.q}</td><td style="text-align:right">${d.impr.toLocaleString()}</td>${deltaCell(d.dImpr)}<td style="text-align:right">${d.clicks.toLocaleString()}</td>${deltaCell(d.dClicks)}</tr>`;
+});
+qt.innerHTML+=`<tr style="font-weight:700;border-top:2px solid #ddd"><td>Total général</td><td style="text-align:right">${qTotImpr.toLocaleString()}</td><td></td><td style="text-align:right">${qTotClicks.toLocaleString()}</td><td></td></tr>`;
+
+// 1.4 Brand LP Table
+const brandLP=[
+  {url:'/nl-be/',clicks:142,d:-58.2},
+  {url:'/nl-be/contact/',clicks:98,d:-45.8},
+  {url:'/nl-be/facility-management/',clicks:85,d:-32.4},
+  {url:'/nl-be/gebouwbeheer/',clicks:72,d:-28.6},
+  {url:'/nl-be/digital-building/',clicks:64,d:-52.1},
+  {url:'/nl-be/hvac-onderhoud/',clicks:58,d:-18.4},
+  {url:'/nl-be/industry-infrastructure/',clicks:45,d:-42.8},
+  {url:'/nl-be/careers/',clicks:42,d:+12.6},
+  {url:'/nl-be/energy-transition/',clicks:38,d:-55.2},
+  {url:'/nl-be/blog/smart-building-trends/',clicks:28,d:-35.8},
+];
+const blt=document.getElementById('brandLPtable');
+brandLP.forEach(d=>{
+  blt.innerHTML+=`<tr><td style="max-width:320px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${d.url}</td><td style="text-align:right">${d.clicks}</td>${deltaCell(d.d)}</tr>`;
+});
+
+// 2.1 GA4 Bar Chart — Year over Year
+const ga4Months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const ga4Prev=[305,280,320,295,340,310,365,290,335,380,350,410];
+const ga4Curr=[4228,3850,4120,4655,0,0,0,0,0,0,0,0];
+new Chart(document.getElementById('chartGA4bar'),{
+  type:'bar',
+  data:{labels:ga4Months,datasets:[
+    {label:'2025',data:ga4Prev,backgroundColor:'#999',borderRadius:3,barPercentage:.6},
+    {label:'2026',data:ga4Curr,backgroundColor:C.orange,borderRadius:3,barPercentage:.6},
+  ]},
+  options:{
+    plugins:{legend:{labels:{font:{size:10},boxWidth:10}},datalabels:{display:ctx=>ctx.dataset.data[ctx.dataIndex]>0,anchor:'end',align:'top',color:'#555',font:{size:9,weight:'bold'},formatter:v=>v>=1000?(v/1000).toFixed(1)+'K':v}},
+    scales:{y:{ticks:{font:{size:9},callback:v=>v>=1000?(v/1000)+'K':v},grid:{color:'#ebe6dc'}},x:{ticks:{font:{size:9}},grid:{display:false}}}
+  },
+  plugins:[ChartDataLabels]
+});
+
+// 2.2 GA4 Top Landing Pages
+const ga4LP=[
+  {url:'/nl-be/',sess:1245,d:+1280.5},
+  {url:'/nl-be/facility-management/',sess:620,d:+850.2},
+  {url:'/nl-be/gebouwbeheer/',sess:480,d:+620.8},
+  {url:'/nl-be/digital-building/',sess:385,d:+540.1},
+  {url:'/nl-be/contact/',sess:310,d:+180.4},
+  {url:'/nl-be/hvac-onderhoud/',sess:285,d:+420.6},
+  {url:'/nl-be/industry-infrastructure/',sess:242,d:+380.2},
+  {url:'/nl-be/careers/',sess:198,d:+95.8},
+  {url:'/nl-be/energy-transition/',sess:165,d:+520.4},
+  {url:'/nl-be/carbon-neutrality/',sess:142,d:+680.2},
+  {url:'/nl-be/blog/smart-building-trends/',sess:118,d:+340.6},
+  {url:'/nl-be/blog/hvac-tips/',sess:95,d:+280.1},
+  {url:'/nl-be/co2-reduction/',sess:82,d:+450.8},
+  {url:'/nl-be/references/',sess:68,d:+120.5},
+];
+const glt=document.getElementById('ga4LPtable');
+ga4LP.forEach(d=>{
+  glt.innerHTML+=`<tr><td style="max-width:320px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${d.url}</td><td style="text-align:right">${d.sess.toLocaleString()}</td>${deltaCell(d.d)}</tr>`;
 });
 </script>
 </body>
