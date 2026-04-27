@@ -152,43 +152,31 @@
 <div id="tab-overview" class="tab-content active">
 <div class="content">
 
-  <!-- 1. KPIs — 5 cards, no "Not Ranked" -->
-  <div class="kpi-row">
+  <!-- 1. KPIs — 3 strategic cards -->
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px">
     <div class="kpi-card">
-      <span class="ci">&#9432;<span class="tip">Total keywords being tracked in this panel.</span></span>
-      <div class="kpi-label">Tracked Keywords</div>
-      <div class="kpi-val">320</div>
-      <div class="kpi-cmp">Panel &middot; Belgium NL &middot; Google</div>
-    </div>
-    <div class="kpi-card">
-      <span class="ci">&#9432;<span class="tip">Keywords with any ranking (pos 1–99) / total tracked keywords.</span></span>
-      <div class="kpi-label">Ranked Coverage</div>
-      <div class="kpi-val">7.8%</div>
-      <div class="kpi-cmp">25 / 320 keywords</div>
-    </div>
-    <div class="kpi-card">
-      <span class="ci">&#9432;<span class="tip">Keywords in positions 1–10 / total tracked keywords.</span></span>
-      <div class="kpi-label">Top 10 Coverage</div>
-      <div class="kpi-val">7.8%</div>
-      <div class="kpi-cmp">25 / 320 keywords</div>
-    </div>
-    <div class="kpi-card">
-      <span class="ci">&#9432;<span class="tip">Estimated clicks/month on tracked keywords, based on search volume &times; CTR by position.</span></span>
-      <div class="kpi-label">Est. Traffic (panel)</div>
-      <div class="kpi-val">56</div>
-      <div class="kpi-cmp">est. clicks/month &middot; 320 kw panel</div>
-    </div>
-    <div class="kpi-card">
-      <span class="ci">&#9432;<span class="tip">Share of panel traffic potential vs tracked competitors. Calculated as est. clicks(equans) / est. clicks(all domains).</span></span>
+      <span class="ci">&#9432;<span class="tip">Share of panel traffic potential vs tracked competitors. Calculated as est. clicks(equans) / est. clicks(all domains) on 320 keywords.</span></span>
       <div class="kpi-label">SEO Share of Voice</div>
       <div class="kpi-val accent">78.7%</div>
-      <div class="kpi-cmp">vs se.com at 19.6%</div>
+      <div class="kpi-cmp"><span class="up">&#9650; +5.2 pts</span> vs previous period &middot; 320 kw panel</div>
+    </div>
+    <div class="kpi-card">
+      <span class="ci">&#9432;<span class="tip">Keywords in positions 1–10 / total tracked keywords (320).</span></span>
+      <div class="kpi-label">Top 10 Coverage</div>
+      <div class="kpi-val">7.8%</div>
+      <div class="kpi-cmp"><span class="up">&#9650; +2.3 pts</span> vs previous period &middot; 25 / 320 keywords</div>
+    </div>
+    <div class="kpi-card">
+      <span class="ci">&#9432;<span class="tip">Closest competitor's SOV compared to Equans. Shows how far ahead or behind you are.</span></span>
+      <div class="kpi-label">Gap vs closest competitor</div>
+      <div class="kpi-val" style="color:#27ae60">+59.1 pts</div>
+      <div class="kpi-cmp">Equans 78.7% vs se.com 19.6%</div>
     </div>
   </div>
 
   <!-- 2. COMPETITIVE SNAPSHOT -->
   <div class="section-sep">Competitive Snapshot</div>
-  <div class="g32">
+  <div class="g2">
     <div class="card" style="margin:0">
       <div class="card-hdr">
         <div>
@@ -196,7 +184,7 @@
           <div class="card-sub">% of tracked keywords where each domain ranks in Top 10</div>
         </div>
       </div>
-      <canvas id="chartVisBar" height="140"></canvas>
+      <canvas id="chartVisBar" height="160"></canvas>
     </div>
     <div class="card" style="margin:0">
       <div class="card-hdr">
@@ -205,23 +193,20 @@
           <div class="card-sub">Estimated click share on tracked keywords (search volume &times; CTR by position)</div>
         </div>
       </div>
-      <canvas id="sovOverviewDonut" height="180"></canvas>
+      <canvas id="sovOverviewDonut" height="210"></canvas>
     </div>
   </div>
 
-  <!-- 3. TOP 15 ORGANIC COMPETITORS -->
-  <div class="card" style="padding:14px 16px">
-    <div class="card-hdr">
+  <!-- 3. TOP 15 ORGANIC COMPETITORS (collapsible) -->
+  <details class="card" style="padding:14px 16px;cursor:default">
+    <summary style="display:flex;justify-content:space-between;align-items:center;cursor:pointer;list-style:none">
       <div>
-        <div class="card-title">Top 15 Organic Competitors <span class="ci">&#9432;<span class="tip">Includes informational &amp; institutional sites. Shows who else appears on your tracked keyword set.</span></span></div>
-        <div class="card-sub">Domains also ranking on the tracked keyword set (beyond core competitors)</div>
+        <div class="card-title" style="display:inline">Top 15 Organic Competitors <span class="ci">&#9432;<span class="tip">Includes informational &amp; institutional sites. Shows who else appears on your tracked keyword set.</span></span></div>
+        <div class="card-sub">Domains also ranking on the tracked keyword set — click to expand</div>
       </div>
-      <div style="display:flex;gap:8px;align-items:center">
-        <select class="sel"><option>Select labels</option></select>
-        <button class="btn-or">Select</button>
-      </div>
-    </div>
-    <div class="g32" style="margin:0">
+      <span style="font-size:18px;color:#aaa;transition:transform .2s">&#9660;</span>
+    </summary>
+    <div class="g32" style="margin:12px 0 0">
       <div>
         <div class="card-sub" style="margin-bottom:6px;text-align:center">Number of Competitor pages on the same keywords</div>
         <div style="height:280px"><canvas id="chartPresenceBar"></canvas></div>
@@ -230,7 +215,7 @@
         <canvas id="chartPresenceDonut" height="240"></canvas>
       </div>
     </div>
-  </div>
+  </details>
 
   <!-- 4. VISIBILITY TREND -->
   <div class="card">
@@ -300,36 +285,6 @@
     </table>
   </div>
 
-  <!-- 6. STRENGTHS / WEAKNESSES RADAR -->
-  <div class="card" style="padding:0;overflow:hidden">
-    <div style="padding:20px 20px 0">
-      <div class="card-hdr" style="margin-bottom:0">
-        <div>
-          <div class="card-title">Strengths and weaknesses per label</div>
-          <div class="card-sub">Competitive comparison across selected labels (Top 10 coverage)</div>
-        </div>
-        <div style="display:flex;gap:8px;align-items:center">
-          <select class="sel"><option>5 labels selected</option></select>
-          <button class="btn-or">Select</button>
-        </div>
-      </div>
-    </div>
-    <div class="radar-wrap">
-      <div class="radar-panel">
-        <div class="radar-date">27-03-2025</div>
-        <div class="no-data">No data available</div>
-      </div>
-      <div class="radar-panel">
-        <div class="radar-date">21-04-2026</div>
-        <div class="legend-row" style="font-size:10px">
-          <span><span class="ldot" style="background:#e8a838"></span>equans.be</span>
-          <span><span class="ldot" style="background:#ef5350"></span>se.com</span>
-          <span><span class="ldot" style="background:#26c6da"></span>honeywell.com</span>
-        </div>
-        <canvas id="chartRadar" height="230"></canvas>
-      </div>
-    </div>
-  </div>
 
 </div>
 </div>
@@ -609,18 +564,6 @@ priorityData.forEach(d=>{
   const prioStyle=d.prio==='high'?'background:#fde8e8;color:#c0392b':d.prio==='medium'?'background:#fef6e8;color:#b8860b':'background:#eee;color:#888';
   const prioLabel=d.prio==='high'?'&#9650; High':d.prio==='medium'?'&#9644; Medium':'&#9660; Low';
   pt.innerHTML+=`<tr><td><span class="theme-badge" style="background:${d.color}">${d.label}</span></td><td>${d.cov}</td><td>${d.nr}</td><td>${d.vol}</td><td><span style="${prioStyle};font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">${prioLabel}</span></td></tr>`;
-});
-
-// 7. Radar
-const rLabels=['Fac. & Maint.','Equans Digital','Carbon Shift','Industry & Infra','ET-campagne'];
-new Chart(document.getElementById('chartRadar'),{
-  type:'radar',
-  data:{labels:rLabels,datasets:[
-    {label:'equans.be',data:[22.5,8.2,2.9,15.4,2.4],borderColor:C.orange,backgroundColor:'rgba(232,168,56,.12)',borderWidth:2.5,pointRadius:3},
-    {label:'se.com',data:[12.5,6.2,1.0,7.7,0],borderColor:C.red,backgroundColor:C.red+'18',borderWidth:2,pointRadius:2},
-    {label:'honeywell.com',data:[2.5,1.4,0,0,0],borderColor:C.cyan,backgroundColor:C.cyan+'18',borderWidth:2,pointRadius:2},
-  ]},
-  options:{plugins:{legend:{display:false},datalabels:{display:false}},scales:{r:{beginAtZero:true,ticks:{font:{size:9},backdropColor:'transparent'},grid:{color:'#ebe6dc'},pointLabels:{font:{size:10}}}}}
 });
 
 // ══════════════════════════════════════════
