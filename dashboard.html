@@ -294,31 +294,120 @@
      ═══════════════════════════════════════════════════ -->
 <div id="tab-data" class="tab-content">
 <div class="content">
+
+  <!-- GSC HEADER -->
   <div class="int-card">
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
       <span class="int-badge">CONNECTED</span>
       <strong>Google Search Console</strong>
     </div>
-    <div class="g2">
+
+    <!-- GSC KPIs — 3 cards -->
+    <div class="g3" style="margin-bottom:16px">
       <div class="card" style="margin:0">
-        <div class="card-title" style="margin-bottom:10px">Clicks &amp; Impressions</div>
-        <canvas id="chartGSC" height="100"></canvas>
+        <span class="ci">&#9432;<span class="tip">Total organic clicks from GSC for the period.</span></span>
+        <div class="kpi-label">Total Clicks</div>
+        <div class="kpi-val">3,436</div>
+        <div class="kpi-cmp"><span class="up">&#9650; +39.6%</span> vs previous period</div>
       </div>
       <div class="card" style="margin:0">
-        <div class="card-title" style="margin-bottom:10px">Top Queries</div>
-        <table>
-          <thead><tr><th>Query</th><th>Clicks</th><th>Impr.</th><th>CTR</th><th>Pos.</th></tr></thead>
-          <tbody>
-            <tr><td>equans belgium</td><td>820</td><td>4,100</td><td>20%</td><td>1.2</td></tr>
-            <tr><td>facility management</td><td>340</td><td>12,400</td><td>2.7%</td><td>8.4</td></tr>
-            <tr><td>building automation</td><td>180</td><td>6,200</td><td>2.9%</td><td>6.1</td></tr>
-            <tr><td>hvac onderhoud</td><td>120</td><td>3,800</td><td>3.2%</td><td>7.2</td></tr>
-            <tr><td>energietransitie bedrijven</td><td>85</td><td>2,900</td><td>2.9%</td><td>9.8</td></tr>
-          </tbody>
-        </table>
+        <span class="ci">&#9432;<span class="tip">Average position across all GSC queries.</span></span>
+        <div class="kpi-label">Avg. Position</div>
+        <div class="kpi-val">12.4</div>
+        <div class="kpi-cmp"><span class="up">&#9650; -1.8</span> vs previous period</div>
+      </div>
+      <div class="card" style="margin:0">
+        <span class="ci">&#9432;<span class="tip">% of total GSC clicks coming from the 320 tracked keywords in Semactic panel.</span></span>
+        <div class="kpi-label">Panel Coverage %</div>
+        <div class="kpi-val accent">74%</div>
+        <div class="kpi-cmp">2,547 clicks from 320 panel keywords</div>
+      </div>
+    </div>
+
+    <!-- GSC Clicks by Label -->
+    <div class="card" style="margin-bottom:16px">
+      <div class="card-hdr">
+        <div>
+          <div class="card-title">Clicks Trend by Label</div>
+          <div class="card-sub">GSC clicks breakdown aligned with Semactic thematic labels</div>
+        </div>
+      </div>
+      <div class="legend-row" id="gscLabelLegend"></div>
+      <canvas id="chartGSCbyLabel" height="80"></canvas>
+    </div>
+
+    <!-- GSC Performance by Label -->
+    <div class="card" style="margin-bottom:16px">
+      <div class="card-hdr">
+        <div>
+          <div class="card-title">Performance by Label</div>
+          <div class="card-sub">GSC metrics aligned with Semactic tracking labels</div>
+        </div>
+      </div>
+      <table>
+        <thead><tr><th>Label</th><th>Clicks</th><th>CTR</th><th>Avg. Position</th><th>Panel Coverage</th></tr></thead>
+        <tbody>
+          <tr><td><span class="theme-badge" style="background:#ff9800">Facility &amp; Maintenance</span></td><td>1,245</td><td>4.8%</td><td>6.2</td><td><span style="background:#d5f5e3;color:#1e8449;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">78%</span></td></tr>
+          <tr><td><span class="theme-badge" style="background:#1976d2">Equans Digital</span></td><td>856</td><td>3.2%</td><td>11.5</td><td><span style="background:#fef6e8;color:#b8860b;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">42%</span></td></tr>
+          <tr><td><span class="theme-badge" style="background:#ccc">No label</span></td><td>535</td><td>5.1%</td><td>4.1</td><td><span style="background:#fde8e8;color:#c0392b;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">12%</span></td></tr>
+          <tr><td><span class="theme-badge" style="background:#ef5350">Industry &amp; Infrastructure</span></td><td>482</td><td>3.7%</td><td>9.8</td><td><span style="background:#d5f5e3;color:#1e8449;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">65%</span></td></tr>
+          <tr><td><span class="theme-badge" style="background:#26c6da">Carbon Shift</span></td><td>318</td><td>2.9%</td><td>14.3</td><td><span style="background:#fde8e8;color:#c0392b;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">23%</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- GSC Top Queries with In Panel -->
+    <div class="card" style="margin-bottom:16px">
+      <div class="card-hdr">
+        <div>
+          <div class="card-title">Top Queries</div>
+          <div class="card-sub">GSC queries with panel tracking status and position delta vs Semactic</div>
+        </div>
+      </div>
+      <table>
+        <thead><tr><th>Query</th><th>Impressions</th><th>Clicks</th><th>In Panel</th><th>Position</th><th>&Delta; vs Semactic</th></tr></thead>
+        <tbody>
+          <tr><td>equans belgium</td><td>8,450</td><td>624</td><td><span style="background:#d5f5e3;color:#1e8449;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">&#10003; Yes</span></td><td>1.2</td><td>&#177;0</td></tr>
+          <tr><td>facility management belgium</td><td>12,800</td><td>385</td><td><span style="background:#d5f5e3;color:#1e8449;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">&#10003; Yes</span></td><td>5.4</td><td><span class="up">-1.2</span></td></tr>
+          <tr><td>gebouwbeheer brussel</td><td>6,200</td><td>248</td><td><span style="background:#d5f5e3;color:#1e8449;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">&#10003; Yes</span></td><td>7.1</td><td><span class="dn">+0.5</span></td></tr>
+          <tr><td>hvac onderhoud</td><td>4,100</td><td>186</td><td><span style="background:#d5f5e3;color:#1e8449;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">&#10003; Yes</span></td><td>6.8</td><td><span class="up">-0.3</span></td></tr>
+          <tr><td>equans carri&egrave;re</td><td>2,800</td><td>156</td><td><span style="background:#eee;color:#888;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">&#10007; No</span></td><td>2.1</td><td style="color:#aaa">—</td></tr>
+          <tr><td>energietransitie bedrijven</td><td>3,800</td><td>124</td><td><span style="background:#d5f5e3;color:#1e8449;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">&#10003; Yes</span></td><td>8.9</td><td><span class="dn">+1.4</span></td></tr>
+          <tr><td>technisch gebouwbeheer</td><td>5,600</td><td>118</td><td><span style="background:#d5f5e3;color:#1e8449;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">&#10003; Yes</span></td><td>9.2</td><td>&#177;0</td></tr>
+          <tr><td>building automation belgium</td><td>2,900</td><td>95</td><td><span style="background:#d5f5e3;color:#1e8449;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">&#10003; Yes</span></td><td>11.3</td><td><span class="up">-2.1</span></td></tr>
+          <tr><td>duurzame energie oplossingen</td><td>2,400</td><td>78</td><td><span style="background:#d5f5e3;color:#1e8449;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">&#10003; Yes</span></td><td>13.6</td><td><span class="dn">+0.8</span></td></tr>
+          <tr><td>datacenter koeling</td><td>1,850</td><td>64</td><td><span style="background:#eee;color:#888;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">&#10007; No</span></td><td>8.4</td><td style="color:#aaa">—</td></tr>
+          <tr><td>industri&euml;le elektriciteit</td><td>3,200</td><td>52</td><td><span style="background:#eee;color:#888;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">&#10007; No</span></td><td>15.2</td><td style="color:#aaa">—</td></tr>
+          <tr><td>smart building technology</td><td>1,600</td><td>42</td><td><span style="background:#d5f5e3;color:#1e8449;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">&#10003; Yes</span></td><td>12.9</td><td><span class="dn">+3.2</span></td></tr>
+          <tr><td>netcongestie oplossingen</td><td>980</td><td>28</td><td><span style="background:#d5f5e3;color:#1e8449;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">&#10003; Yes</span></td><td>22.4</td><td><span class="up">-1.8</span></td></tr>
+          <tr><td>co2 reductie industrie</td><td>1,200</td><td>24</td><td><span style="background:#d5f5e3;color:#1e8449;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">&#10003; Yes</span></td><td>19.8</td><td><span class="dn">+2.5</span></td></tr>
+          <tr><td>warmtepomp installatie prijs</td><td>4,100</td><td>48</td><td><span style="background:#eee;color:#888;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">&#10007; No</span></td><td>18.7</td><td style="color:#aaa">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Panel vs Non-panel -->
+    <div class="card">
+      <div class="card-hdr">
+        <div>
+          <div class="card-title">Panel vs Non-panel Performance</div>
+          <div class="card-sub">Validating the relevance of the 320 tracked keywords vs organic discovery</div>
+        </div>
+      </div>
+      <table>
+        <thead><tr><th>Segment</th><th>Keywords</th><th>Total Clicks</th><th>Avg CTR</th><th>Avg Position</th><th>% of Traffic</th></tr></thead>
+        <tbody>
+          <tr><td><strong style="color:#e8a838">&#9632; In Panel</strong> (tracked Semactic)</td><td>320</td><td>2,547</td><td>3.8%</td><td>9.7</td><td><span style="background:#d5f5e3;color:#1e8449;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">74%</span></td></tr>
+          <tr><td><strong style="color:#aaa">&#9632; Out Panel</strong> (organic discovery)</td><td>~16,451</td><td>889</td><td>4.2%</td><td>11.2</td><td><span style="background:#eee;color:#888;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">26%</span></td></tr>
+        </tbody>
+      </table>
+      <div class="method-box" style="margin-top:12px">
+        <strong>Insight:</strong> 74% of traffic comes from the 320 tracked keywords, validating panel relevance. Out-panel keywords show higher CTR (4.2% vs 3.8%) but lower position, suggesting untapped branded or transactional queries not yet tracked.
       </div>
     </div>
   </div>
+
+  <!-- GA4 -->
   <div class="int-card">
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
       <span class="int-badge">CONNECTED</span>
@@ -569,13 +658,24 @@ priorityData.forEach(d=>{
 // ══════════════════════════════════════════
 // TAB 2 — CONNECTED DATA
 // ══════════════════════════════════════════
-new Chart(document.getElementById('chartGSC'),{
+const gscLabels=[
+  {label:'Facility & Maintenance',data:[60,68,78,88,95,102,108,115,120,128,135,142,148],color:'#ff9800'},
+  {label:'Equans Digital',data:[38,42,48,55,60,66,72,78,82,88,92,98,104],color:'#1976d2'},
+  {label:'Industry & Infrastructure',data:[22,25,28,32,35,38,40,42,45,48,50,52,55],color:'#ef5350'},
+  {label:'Carbon Shift',data:[12,14,16,18,20,22,24,26,28,30,32,34,36],color:'#26c6da'},
+  {label:'No label',data:[28,30,32,34,36,38,40,42,44,46,48,50,52],color:'#ccc'},
+];
+const gscLeg=document.getElementById('gscLabelLegend');
+gscLabels.forEach(d=>{
+  const last=d.data[d.data.length-1];
+  gscLeg.innerHTML+=`<span><span class="ldot" style="background:${d.color}"></span>${d.label} — <strong>${last}</strong></span>`;
+});
+new Chart(document.getElementById('chartGSCbyLabel'),{
   type:'line',
-  data:{labels:months,datasets:[
-    {label:'Clicks',data:[420,480,520,580,640,710,780,850,920,980,1050,1120,1180],borderColor:C.green,borderWidth:2,tension:.35,pointRadius:2,fill:false},
-    {label:'Impressions (k)',data:[18,22,26,30,34,38,42,46,50,54,58,62,66],borderColor:C.pink,borderWidth:2,tension:.35,pointRadius:2,borderDash:[4,3],fill:false,yAxisID:'y1'},
-  ]},
-  options:{plugins:{legend:{labels:{font:{size:10},boxWidth:10}},datalabels:{display:false}},scales:{y:{ticks:{font:{size:10}},grid:{color:'#ebe6dc'}},y1:{position:'right',ticks:{font:{size:10},callback:v=>v+'k'},grid:{display:false}},x:{ticks:{font:{size:10}},grid:{display:false}}}}
+  data:{labels:months,datasets:gscLabels.map(d=>({
+    label:d.label,data:d.data,borderColor:d.color,borderWidth:2,tension:.35,pointRadius:1,pointHoverRadius:4,fill:false
+  }))},
+  options:{plugins:{legend:{display:false},datalabels:{display:false}},scales:{y:{ticks:{font:{size:10}},grid:{color:'#ebe6dc'}},x:{ticks:{font:{size:10}},grid:{display:false}}}}
 });
 new Chart(document.getElementById('chartGA4'),{
   type:'line',
