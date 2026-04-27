@@ -42,8 +42,8 @@
     .card-hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}
     .card-title{font-size:14px;font-weight:700;color:#111}
     .card-sub{font-size:11px;color:#aaa;margin-top:2px}
-    .g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
-    .g32{display:grid;grid-template-columns:3fr 2fr;gap:14px;margin-bottom:16px}
+    .g2{display:grid;grid-template-columns:1.6fr 1fr;gap:14px;margin-bottom:16px}
+    .g32{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-bottom:16px}
     .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:16px}
 
     /* SOV section */
@@ -199,7 +199,7 @@
           <div class="card-sub">Estimated click share on tracked keywords (search volume &times; CTR by position)</div>
         </div>
       </div>
-      <canvas id="sovOverviewDonut" height="180"></canvas>
+      <canvas id="sovOverviewDonut" height="160"></canvas>
     </div>
   </div>
 
@@ -221,7 +221,7 @@
         <div style="height:280px"><canvas id="chartPresenceBar"></canvas></div>
       </div>
       <div style="display:flex;align-items:center;justify-content:center">
-        <canvas id="chartPresenceDonut" height="240"></canvas>
+        <canvas id="chartPresenceDonut" height="200"></canvas>
       </div>
     </div>
   </div>
@@ -261,7 +261,7 @@
     <div class="card" style="margin:0">
       <div class="card-title" style="margin-bottom:4px">Panel weight by label</div>
       <div class="card-sub" style="margin-bottom:10px">Search volume distribution across tracked labels</div>
-      <canvas id="chartThemePie" height="240"></canvas>
+      <canvas id="chartThemePie" height="200"></canvas>
     </div>
   </div>
 
@@ -441,7 +441,7 @@ new Chart(document.getElementById('chartPresenceDonut'),{
   type:'doughnut',
   data:{labels:presenceData.map(d=>d.name),datasets:[{data:presenceData.map(d=>d.kw),backgroundColor:presenceData.map(d=>d.color),borderWidth:2,borderColor:'#faf7f2'}]},
   options:{cutout:'55%',plugins:{
-    legend:{position:'right',labels:{font:{size:10},boxWidth:12,padding:10,generateLabels:chart=>{
+    legend:{position:'right',labels:{font:{size:9},boxWidth:8,padding:6,generateLabels:chart=>{
       return chart.data.labels.map((l,i)=>{const d=presenceData[i];const pct=totalP?(d.kw/totalP*100).toFixed(1):'0';return{text:l+' ('+pct+'%)',fillStyle:d.color,strokeStyle:'#faf7f2',lineWidth:2,index:i};});
     }}},
     datalabels:{display:ctx=>ctx.dataset.data[ctx.dataIndex]>0,color:'#fff',font:{size:11,weight:'bold'},formatter:(v)=>{const pct=totalP?(v/totalP*100).toFixed(1):'0';return pct+'%';}}
@@ -474,7 +474,7 @@ new Chart(document.getElementById('sovOverviewDonut'),{
   type:'doughnut',
   data:{labels:sovOv.map(d=>d.name),datasets:[{data:sovOv.map(d=>d.pct),backgroundColor:sovOv.map(d=>d.color),borderWidth:2,borderColor:'#faf7f2'}]},
   options:{cutout:'55%',plugins:{
-    legend:{position:'bottom',labels:{font:{size:10},boxWidth:10,padding:8,generateLabels:chart=>{
+    legend:{position:'bottom',labels:{font:{size:9},boxWidth:8,padding:5,generateLabels:chart=>{
       return chart.data.labels.map((l,i)=>{const d=sovOv[i];return{text:l+' — '+d.pct+'% ('+d.traffic+')',fillStyle:d.color,strokeStyle:'#faf7f2',lineWidth:2,index:i};});
     }}},
     tooltip:{callbacks:{label:ctx=>{const d=sovOv[ctx.dataIndex];return d.name+': '+d.pct+'% — est. '+d.traffic+' visits';}}},
@@ -512,7 +512,7 @@ labelData.forEach(t=>{
 new Chart(document.getElementById('chartThemePie'),{
   type:'pie',
   data:{labels:labelData.map(t=>t.name),datasets:[{data:labelData.map(t=>t.vol),backgroundColor:labelData.map(t=>t.color),borderWidth:2,borderColor:'#faf7f2'}]},
-  options:{plugins:{legend:{position:'right',labels:{font:{size:9},boxWidth:10,padding:6}},datalabels:{display:ctx=>ctx.dataset.data[ctx.dataIndex]>0,color:'#fff',font:{size:12,weight:'bold'},formatter:(v,ctx)=>{const total=ctx.dataset.data.reduce((a,b)=>a+b,0);return(v/total*100).toFixed(0)+'%';}}}},
+  options:{plugins:{legend:{position:'right',labels:{font:{size:9},boxWidth:8,padding:4}},datalabels:{display:ctx=>ctx.dataset.data[ctx.dataIndex]>0,color:'#fff',font:{size:12,weight:'bold'},formatter:(v,ctx)=>{const total=ctx.dataset.data.reduce((a,b)=>a+b,0);return(v/total*100).toFixed(0)+'%';}}}},
   plugins:[ChartDataLabels]
 });
 
