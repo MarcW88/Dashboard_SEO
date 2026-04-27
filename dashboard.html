@@ -25,8 +25,8 @@
     .content{padding:16px 28px 24px}
     .card:last-child{margin-bottom:0}
 
-    /* KPI — 5 cards */
-    .kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:18px}
+    /* KPI — 4 cards */
+    .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
     .kpi-card{background:#faf7f2;border:1px solid #ebe6dc;border-radius:10px;padding:14px 16px;position:relative}
     .kpi-card .ci{position:absolute;top:10px;right:10px;color:#ccc;font-size:11px;cursor:help}
     .kpi-card .ci .tip{display:none;position:absolute;right:0;top:18px;background:#333;color:#fff;font-size:10px;padding:6px 10px;border-radius:5px;width:200px;z-index:10;line-height:1.4;font-weight:400}
@@ -154,7 +154,7 @@
 <div class="content">
 
   <!-- 1. KPIs — 4 BUSINESS cards (C-Level language, not Semactic duplicates) -->
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px">
+  <div class="kpi-row">
     <div class="kpi-card">
       <span class="ci">&#9432;<span class="tip">Market Share Index = your SOV &divide; competitor SOV &times; 100. Shows competitive dominance ratio — how many times bigger you are vs main competitor on this panel.</span></span>
       <div class="kpi-label">Market Share Index</div>
@@ -282,37 +282,24 @@
     </div>
   </div>
 
-  <!-- 7. STRENGTHS / WEAKNESSES RADAR — 2 periods -->
-  <div class="card" style="padding:0;overflow:hidden">
-    <div style="padding:20px 20px 0">
-      <div class="card-hdr" style="margin-bottom:0">
-        <div>
-          <div class="card-title">Strengths and weaknesses per label</div>
-          <div class="card-sub">Top 10 Coverage by label — competitive evolution across two periods</div>
-        </div>
+  <div class="section-sep">Competitive Radars</div>
+
+  <!-- Radar 1 : Equans vs se.com (7 labels) -->
+  <div class="card">
+    <div class="card-hdr">
+      <div>
+        <div class="card-title">Competitive Radar — Label Comparison</div>
+        <div class="card-sub">Equans vs se.com across 7 main labels (Top 10 coverage %)</div>
       </div>
     </div>
-    <div class="radar-wrap">
-      <div class="radar-panel">
-        <div class="radar-date">27-03-2025</div>
-        <div class="legend-row" style="font-size:10px">
-          <span><span class="ldot" style="background:#e8a838"></span>equans.be</span>
-          <span><span class="ldot" style="background:#ef5350"></span>se.com</span>
-        </div>
-        <canvas id="chartRadarP1" height="230"></canvas>
-      </div>
-      <div class="radar-panel">
-        <div class="radar-date">21-04-2026</div>
-        <div class="legend-row" style="font-size:10px">
-          <span><span class="ldot" style="background:#e8a838"></span>equans.be</span>
-          <span><span class="ldot" style="background:#ef5350"></span>se.com</span>
-        </div>
-        <canvas id="chartRadarP2" height="230"></canvas>
-      </div>
+    <div class="legend-row">
+      <span><span class="ldot" style="background:#e8a838"></span>equans.be — <strong>dominance</strong></span>
+      <span><span class="ldot" style="background:#ef5350"></span>se.com — <strong>challenger</strong></span>
     </div>
+    <canvas id="chartRadar1" height="260"></canvas>
   </div>
 
-  <!-- RADAR 2 : All Competitors Overview -->
+  <!-- Radar 2 : All Competitors (9 labels) -->
   <div class="card" style="margin-bottom:0">
     <div class="card-hdr">
       <div>
@@ -320,7 +307,12 @@
         <div class="card-sub">SOV comparison across all 9 thematic labels (Equans + competitors)</div>
       </div>
     </div>
-    <canvas id="chartRadarAll" height="80"></canvas>
+    <div class="legend-row">
+      <span><span class="ldot" style="background:#e8a838"></span>equans.be</span>
+      <span><span class="ldot" style="background:#ef5350"></span>se.com</span>
+      <span><span class="ldot" style="background:#26c6da"></span>honeywell.com</span>
+    </div>
+    <canvas id="chartRadar2" height="260"></canvas>
   </div>
 
   <!-- 8. TOP 15 ORGANIC COMPETITORS (bar only, bottom context) -->
@@ -687,38 +679,27 @@ new Chart(document.getElementById('chartThemePie'),{
 });
 
 
-// 7. Radar — 2 periods
-const rLabels=['Fac. & Maint.','Equans Digital','Industry & Infra','Carbon Shift','ET-campagne'];
-const radarOpts={plugins:{legend:{display:false},datalabels:{display:false}},scales:{r:{beginAtZero:true,ticks:{font:{size:9},backdropColor:'transparent'},grid:{color:'#ebe6dc'},pointLabels:{font:{size:10}}}}};
-new Chart(document.getElementById('chartRadarP1'),{
+// 7. Radar 1 — Equans vs se.com (7 labels)
+const rLabels1=['Fac. & Maint.','Digital','Industry','Carbon','ET-camp.','CO2 Reduc.','No label'];
+new Chart(document.getElementById('chartRadar1'),{
   type:'radar',
-  data:{labels:rLabels,datasets:[
-    {label:'equans.be',data:[12.5,3.4,8.2,1.0,0],borderColor:C.orange,backgroundColor:'rgba(232,168,56,.12)',borderWidth:2.5,pointRadius:3},
-    {label:'se.com',data:[18.8,8.2,10.8,2.0,0],borderColor:C.red,backgroundColor:C.red+'18',borderWidth:2,pointRadius:2},
+  data:{labels:rLabels1,datasets:[
+    {label:'equans.be',data:[22.5,8.2,15.4,2.9,2.4,5.0,20.0],borderColor:C.orange,backgroundColor:'rgba(232,168,56,.12)',borderWidth:2.5,pointRadius:3},
+    {label:'se.com',data:[12.5,6.2,7.7,1.0,0,0,0],borderColor:C.red,backgroundColor:C.red+'18',borderWidth:2,pointRadius:2},
   ]},
-  options:radarOpts
-});
-new Chart(document.getElementById('chartRadarP2'),{
-  type:'radar',
-  data:{labels:rLabels,datasets:[
-    {label:'equans.be',data:[22.5,8.2,15.4,2.9,2.4],borderColor:C.orange,backgroundColor:'rgba(232,168,56,.12)',borderWidth:2.5,pointRadius:3},
-    {label:'se.com',data:[12.5,6.2,7.7,1.0,0],borderColor:C.red,backgroundColor:C.red+'18',borderWidth:2,pointRadius:2},
-  ]},
-  options:radarOpts
+  options:{plugins:{legend:{position:'bottom',labels:{font:{size:11}}},datalabels:{display:false}},scales:{r:{beginAtZero:true,ticks:{font:{size:10},backdropColor:'transparent'},grid:{color:'#ebe6dc'},pointLabels:{font:{size:11}}}}}
 });
 
 // Radar 2 — All Competitors (9 labels)
-new Chart(document.getElementById('chartRadarAll'),{
+const rLabels2=['Facility','Digital','Industry','No label','Carbon','CO2 Reduc.','ET-camp.','Electrif.','Netcongest.'];
+new Chart(document.getElementById('chartRadar2'),{
   type:'radar',
-  data:{
-    labels:['Facility Mgmt','Digital Building','Industry 4.0','Carbon Neutrality','Energy Transition','Smart Cities','Building Auto','HVAC','Sustainable Infra'],
-    datasets:[
-      {label:'Equans',data:[74.5,68.2,58.3,52.1,51.8,45.2,38.7,28.4,22.9],borderColor:C.orange,backgroundColor:'rgba(232,168,56,.15)',borderWidth:2.5,pointRadius:3},
-      {label:'se.com',data:[22.4,28.1,35.2,42.8,38.5,52.8,45.2,45.2,58.3],borderColor:'#95a5a6',backgroundColor:'rgba(149,165,166,.1)',borderWidth:2,pointRadius:2,borderDash:[4,3]},
-      {label:'Others (avg)',data:[3.1,3.7,6.5,5.1,9.7,2.0,16.1,26.4,18.8],borderColor:'#bdc3c7',backgroundColor:'transparent',borderWidth:1.5,pointRadius:2,borderDash:[2,2]}
-    ]
-  },
-  options:{scales:{r:{min:0,max:100,ticks:{stepSize:20,font:{size:10}},grid:{color:'#ebe6dc'}}},plugins:{legend:{position:'bottom',labels:{font:{size:11}}},datalabels:{display:false}}}
+  data:{labels:rLabels2,datasets:[
+    {label:'equans.be',data:[22.5,8.2,15.4,20.0,2.9,5.0,2.4,0,0],borderColor:C.orange,backgroundColor:'rgba(232,168,56,.15)',borderWidth:2.5,pointRadius:3},
+    {label:'se.com',data:[12.5,6.2,7.7,0,1.0,0,0,0,0],borderColor:C.red,backgroundColor:C.red+'18',borderWidth:2,pointRadius:2,borderDash:[4,3]},
+    {label:'honeywell.com',data:[2.5,1.4,0,0,0,0,0,0,0],borderColor:C.cyan,backgroundColor:C.cyan+'18',borderWidth:2,pointRadius:2,borderDash:[2,2]},
+  ]},
+  options:{plugins:{legend:{position:'bottom',labels:{font:{size:11}}},datalabels:{display:false}},scales:{r:{beginAtZero:true,ticks:{font:{size:10},backdropColor:'transparent'},grid:{color:'#ebe6dc'},pointLabels:{font:{size:10}}}}}
 });
 
 // ══════════════════════════════════════════
