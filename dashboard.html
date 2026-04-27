@@ -312,6 +312,17 @@
     </div>
   </div>
 
+  <!-- RADAR 2 : All Competitors Overview -->
+  <div class="card" style="margin-bottom:0">
+    <div class="card-hdr">
+      <div>
+        <div class="card-title">Multi-Competitor Overview — All Labels</div>
+        <div class="card-sub">SOV comparison across all 9 thematic labels (Equans + competitors)</div>
+      </div>
+    </div>
+    <canvas id="chartRadarAll" height="80"></canvas>
+  </div>
+
   <!-- 8. TOP 15 ORGANIC COMPETITORS (bar only, bottom context) -->
   <div class="card" style="padding:14px 16px">
     <div class="card-hdr">
@@ -694,6 +705,20 @@ new Chart(document.getElementById('chartRadarP2'),{
     {label:'se.com',data:[12.5,6.2,7.7,1.0,0],borderColor:C.red,backgroundColor:C.red+'18',borderWidth:2,pointRadius:2},
   ]},
   options:radarOpts
+});
+
+// Radar 2 — All Competitors (9 labels)
+new Chart(document.getElementById('chartRadarAll'),{
+  type:'radar',
+  data:{
+    labels:['Facility Mgmt','Digital Building','Industry 4.0','Carbon Neutrality','Energy Transition','Smart Cities','Building Auto','HVAC','Sustainable Infra'],
+    datasets:[
+      {label:'Equans',data:[74.5,68.2,58.3,52.1,51.8,45.2,38.7,28.4,22.9],borderColor:C.orange,backgroundColor:'rgba(232,168,56,.15)',borderWidth:2.5,pointRadius:3},
+      {label:'se.com',data:[22.4,28.1,35.2,42.8,38.5,52.8,45.2,45.2,58.3],borderColor:'#95a5a6',backgroundColor:'rgba(149,165,166,.1)',borderWidth:2,pointRadius:2,borderDash:[4,3]},
+      {label:'Others (avg)',data:[3.1,3.7,6.5,5.1,9.7,2.0,16.1,26.4,18.8],borderColor:'#bdc3c7',backgroundColor:'transparent',borderWidth:1.5,pointRadius:2,borderDash:[2,2]}
+    ]
+  },
+  options:{scales:{r:{min:0,max:100,ticks:{stepSize:20,font:{size:10}},grid:{color:'#ebe6dc'}}},plugins:{legend:{position:'bottom',labels:{font:{size:11}}},datalabels:{display:false}}}
 });
 
 // ══════════════════════════════════════════
