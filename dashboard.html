@@ -22,8 +22,7 @@
     .gear-btn{width:34px;height:34px;border-radius:6px;border:1px solid #ddd;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;color:#888}
     .date-btn{display:flex;align-items:center;gap:6px;background:#2d2d2d;color:#fff;font-size:12px;font-weight:500;padding:8px 14px;border-radius:6px;border:none;cursor:pointer}
     .date-btn svg{width:14px;height:14px;stroke:#fff;fill:none}
-    .content{padding:16px 28px 24px}
-    .card:last-child{margin-bottom:0}
+    .content{padding:16px 28px 48px}
 
     /* KPI — 4 cards */
     .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
@@ -43,8 +42,8 @@
     .card-hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px}
     .card-title{font-size:14px;font-weight:700;color:#111}
     .card-sub{font-size:11px;color:#aaa;margin-top:2px}
-    .g2{display:grid;grid-template-columns:1.6fr 1fr;gap:14px;margin-bottom:16px}
-    .g32{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-bottom:16px}
+    .g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+    .g32{display:grid;grid-template-columns:3fr 2fr;gap:14px;margin-bottom:16px}
     .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:16px}
 
     /* SOV section */
@@ -191,7 +190,7 @@
           <div class="card-sub">% of tracked keywords where each domain ranks in Top 10</div>
         </div>
       </div>
-      <canvas id="chartVisBar" height="160"></canvas>
+      <canvas id="chartVisBar" height="140"></canvas>
     </div>
     <div class="card" style="margin:0">
       <div class="card-hdr">
@@ -200,11 +199,34 @@
           <div class="card-sub">Estimated click share on tracked keywords (search volume &times; CTR by position)</div>
         </div>
       </div>
-      <canvas id="sovOverviewDonut" height="160"></canvas>
+      <canvas id="sovOverviewDonut" height="180"></canvas>
     </div>
   </div>
 
-  <!-- 3. VISIBILITY TREND -->
+  <!-- 3. TOP 15 ORGANIC COMPETITORS -->
+  <div class="card" style="padding:14px 16px">
+    <div class="card-hdr">
+      <div>
+        <div class="card-title">Top 15 Organic Competitors <span class="ci">&#9432;<span class="tip">Includes informational &amp; institutional sites. Shows who else appears on your tracked keyword set.</span></span></div>
+        <div class="card-sub">Domains also ranking on the tracked keyword set (beyond core competitors)</div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <select class="sel"><option>Select labels</option></select>
+        <button class="btn-or">Select</button>
+      </div>
+    </div>
+    <div class="g32" style="margin:0">
+      <div>
+        <div class="card-sub" style="margin-bottom:6px;text-align:center">Number of Competitor pages on the same keywords</div>
+        <div style="height:280px"><canvas id="chartPresenceBar"></canvas></div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center">
+        <canvas id="chartPresenceDonut" height="240"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. VISIBILITY TREND -->
   <div class="card">
     <div class="card-hdr">
       <div>
@@ -216,114 +238,96 @@
     <canvas id="chartVisTrend" height="70"></canvas>
   </div>
 
-  <!-- 4. LABEL PERFORMANCE (fused Theme Analysis + Category Leaders) -->
+  <!-- 4. LABEL PERFORMANCE -->
   <div class="section-sep">Label Performance</div>
   <div class="g2">
     <div class="card" style="margin:0">
       <div class="card-hdr">
         <div>
-          <div class="card-title">Label Performance</div>
-          <div class="card-sub">Panel performance, competitive position and leadership by label</div>
+          <div class="card-title">Theme analysis</div>
+          <div class="card-sub">Panel performance by label: traffic potential, coverage and share of voice</div>
+        </div>
+        <div class="radio-g">
+          <label><input type="radio" name="top" checked> Top 10</label>
+          <label><input type="radio" name="top"> Top 5</label>
+          <label><input type="radio" name="top"> Top 3</label>
         </div>
       </div>
       <table>
-        <thead><tr><th>Label</th><th>Top 3 KW</th><th>Top 10 KW</th><th>Coverage %</th><th>Leader</th><th>Status</th></tr></thead>
-        <tbody id="fusedLabelTable"></tbody>
+        <thead><tr><th>Label</th><th>Est. Traffic</th><th>Equans SoV</th><th># KW Top 10</th><th>Coverage %</th><th>Total KW</th></tr></thead>
+        <tbody id="themeTableBody"></tbody>
       </table>
     </div>
     <div class="card" style="margin:0">
       <div class="card-title" style="margin-bottom:4px">Panel weight by label</div>
       <div class="card-sub" style="margin-bottom:10px">Search volume distribution across tracked labels</div>
-      <canvas id="chartThemePie" height="200"></canvas>
+      <canvas id="chartThemePie" height="240"></canvas>
     </div>
   </div>
 
-  <!-- 5. GROWTH OPPORTUNITIES (AI-era — no click estimates) -->
-  <div class="section-sep">Growth Opportunities</div>
-  <div class="g3">
-    <div class="card" style="margin:0">
-      <div class="card-hdr" style="margin-bottom:8px">
-        <div>
-          <div class="card-title" style="color:#e8a838">Top 3 Quick Wins</div>
-          <div class="card-sub">Keywords pos 4–10 &rarr; push to Top 3 (AI-resistant zone)</div>
-        </div>
-      </div>
-      <div class="kpi-val" style="font-size:28px">18</div>
-      <div class="kpi-cmp" style="margin-top:4px">keywords to optimize for Top 3</div>
-      <div class="method-box" style="margin-top:10px;font-size:10px">
-        Top 3 = highest brand visibility even with AI Overviews. These 18 keywords are already Top 10 — small optimization effort, high reward.
-      </div>
-    </div>
-    <div class="card" style="margin:0">
-      <div class="card-hdr" style="margin-bottom:8px">
-        <div>
-          <div class="card-title" style="color:#ef5350">Competitive Gaps</div>
-          <div class="card-sub">Keywords where se.com is Top 10 but Equans is not</div>
-        </div>
-      </div>
-      <div class="kpi-val" style="font-size:28px">186</div>
-      <div class="kpi-cmp" style="margin-top:4px">keywords — territory to conquer</div>
-      <div class="method-box" style="margin-top:10px;font-size:10px">
-        se.com ranks Top 10 on 186 keywords where Equans is absent. Each conquered keyword = competitive ground gained.
-      </div>
-    </div>
-    <div class="card" style="margin:0">
-      <div class="card-hdr" style="margin-bottom:8px">
-        <div>
-          <div class="card-title" style="color:#27ae60">Coverage Goal (6 months)</div>
-          <div class="card-sub">Target: double Top 10 coverage from 25 to 48 keywords</div>
-        </div>
-      </div>
-      <div class="kpi-val" style="font-size:28px">48</div>
-      <div class="kpi-cmp" style="margin-top:4px">target keywords Top 10 &middot; +92% growth</div>
-      <div class="method-box" style="margin-top:10px;font-size:10px">
-        Current: 25/320 (7.8%) &rarr; Target: 48/320 (15%). Coverage growth independent of CTR evolution in AI-era.
-      </div>
-    </div>
-  </div>
-
-  <div class="section-sep">Competitive Radars</div>
-
-  <!-- Radar 1 : Equans vs se.com (7 labels) -->
+  <!-- Category Leaders -->
   <div class="card">
     <div class="card-hdr">
       <div>
-        <div class="card-title">Competitive Radar — Label Comparison</div>
-        <div class="card-sub">Equans vs se.com across 7 main labels (Top 10 coverage %)</div>
+        <div class="card-title">Category Leaders</div>
+        <div class="card-sub">Who leads each label on the tracked panel</div>
       </div>
     </div>
-    <div class="legend-row">
-      <span><span class="ldot" style="background:#e8a838"></span>equans.be — <strong>dominance</strong></span>
-      <span><span class="ldot" style="background:#ef5350"></span>se.com — <strong>challenger</strong></span>
-    </div>
-    <canvas id="chartRadar1" height="260"></canvas>
+    <table>
+      <thead><tr><th>Label</th><th>Leader</th><th>Leader Top 10 %</th><th>Equans Top 10 %</th><th>Status</th></tr></thead>
+      <tbody id="leaderTable"></tbody>
+    </table>
   </div>
 
-  <!-- Radar 2 : All Competitors (9 labels) -->
-  <div class="card" style="margin-bottom:0">
+  <!-- 5. PRIORITY LABELS (merged opportunities) -->
+  <div class="section-sep">Priority Labels</div>
+  <div class="card">
     <div class="card-hdr">
       <div>
-        <div class="card-title">Multi-Competitor Overview — All Labels</div>
-        <div class="card-sub">SOV comparison across all 9 thematic labels (Equans + competitors)</div>
+        <div class="card-title">Priority Labels</div>
+        <div class="card-sub">Labels ranked by opportunity: low coverage + high untapped volume</div>
       </div>
     </div>
-    <div class="legend-row">
-      <span><span class="ldot" style="background:#e8a838"></span>equans.be</span>
-      <span><span class="ldot" style="background:#ef5350"></span>se.com</span>
-      <span><span class="ldot" style="background:#26c6da"></span>honeywell.com</span>
-    </div>
-    <canvas id="chartRadar2" height="260"></canvas>
+    <table>
+      <thead><tr><th>Label</th><th>Top 10 Coverage</th><th>Not Ranked</th><th>Est. Traffic</th><th>Priority</th></tr></thead>
+      <tbody id="priorityTable"></tbody>
+    </table>
   </div>
 
-  <!-- 8. TOP 15 ORGANIC COMPETITORS (bar only, bottom context) -->
-  <div class="card" style="padding:14px 16px">
-    <div class="card-hdr">
-      <div>
-        <div class="card-title">Broader Organic Landscape <span class="ci">&#9432;<span class="tip">Includes informational &amp; institutional sites. Shows who else appears on your tracked keyword set beyond core competitors.</span></span></div>
-        <div class="card-sub">Other domains ranking on the tracked keyword panel (contextual)</div>
+  <!-- 6. STRENGTHS / WEAKNESSES RADAR -->
+  <div class="card" style="padding:0;overflow:hidden">
+    <div style="padding:20px 20px 0">
+      <div class="card-hdr" style="margin-bottom:0">
+        <div>
+          <div class="card-title">Strengths and weaknesses per label</div>
+          <div class="card-sub">Competitive comparison across selected labels (Top 10 coverage)</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <select class="sel"><option>5 labels selected</option></select>
+          <button class="btn-or">Select</button>
+        </div>
       </div>
     </div>
-    <div style="height:280px"><canvas id="chartPresenceBar"></canvas></div>
+    <div class="radar-wrap">
+      <div class="radar-panel">
+        <div class="radar-date">27-03-2025</div>
+        <div class="legend-row" style="font-size:10px">
+          <span><span class="ldot" style="background:#e8a838"></span>equans.be</span>
+          <span><span class="ldot" style="background:#ef5350"></span>se.com</span>
+          <span><span class="ldot" style="background:#26c6da"></span>honeywell.com</span>
+        </div>
+        <canvas id="chartRadar1" height="230"></canvas>
+      </div>
+      <div class="radar-panel">
+        <div class="radar-date">21-04-2026</div>
+        <div class="legend-row" style="font-size:10px">
+          <span><span class="ldot" style="background:#e8a838"></span>equans.be</span>
+          <span><span class="ldot" style="background:#ef5350"></span>se.com</span>
+          <span><span class="ldot" style="background:#26c6da"></span>honeywell.com</span>
+        </div>
+        <canvas id="chartRadar2" height="230"></canvas>
+      </div>
+    </div>
   </div>
 
 </div>
@@ -335,158 +339,44 @@
 <div id="tab-data" class="tab-content">
 <div class="content">
 
-  <!-- KPIs — 5 cards, same design as Overview -->
-  <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:18px">
-    <div class="kpi-card">
-      <span class="ci">&#9432;<span class="tip">Total organic clicks from Google Search Console for the current period.</span></span>
-      <div class="kpi-label">Clicks (GSC)</div>
-      <div class="kpi-val">1,180</div>
-      <div class="kpi-cmp"><span class="up">&#9650; +15.2%</span> vs previous period</div>
+  <div class="int-card">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+      <span class="int-badge">CONNECTED</span>
+      <strong>Google Search Console</strong>
     </div>
-    <div class="kpi-card">
-      <span class="ci">&#9432;<span class="tip">Total impressions in Google Search. Measures how often your pages appear in search results — key indicator of search exposure.</span></span>
-      <div class="kpi-label">Impressions (GSC)</div>
-      <div class="kpi-val accent">66.0K</div>
-      <div class="kpi-cmp"><span class="up">&#9650; +22.8%</span> vs previous period</div>
-    </div>
-    <div class="kpi-card">
-      <span class="ci">&#9432;<span class="tip">Average position across all GSC queries. Lower = better.</span></span>
-      <div class="kpi-label">Avg. Position</div>
-      <div class="kpi-val">12.4</div>
-      <div class="kpi-cmp"><span class="up">&#9650; -1.8 pts</span> improvement</div>
-    </div>
-    <div class="kpi-card">
-      <span class="ci">&#9432;<span class="tip">Total organic sessions from Google Analytics 4.</span></span>
-      <div class="kpi-label">Sessions (GA4)</div>
-      <div class="kpi-val">1,680</div>
-      <div class="kpi-cmp"><span class="up">&#9650; +18.0%</span> vs previous period</div>
-    </div>
-    <div class="kpi-card">
-      <span class="ci">&#9432;<span class="tip">Organic conversions from GA4. Tracks goal completions from organic traffic.</span></span>
-      <div class="kpi-label">Conversions (GA4)</div>
-      <div class="kpi-val" style="color:#27ae60">284</div>
-      <div class="kpi-cmp"><span class="up">&#9650; +22.0%</span> vs previous period</div>
+    <div class="g2">
+      <div class="card" style="margin:0">
+        <div class="card-title" style="margin-bottom:10px">Clicks &amp; Impressions</div>
+        <canvas id="chartGSC" height="100"></canvas>
+      </div>
+      <div class="card" style="margin:0">
+        <div class="card-title" style="margin-bottom:10px">Top Queries</div>
+        <table>
+          <thead><tr><th>Query</th><th>Clicks</th><th>Impr.</th><th>CTR</th><th>Pos.</th></tr></thead>
+          <tbody>
+            <tr><td>equans belgium</td><td>820</td><td>4,100</td><td>20%</td><td>1.2</td></tr>
+            <tr><td>facility management</td><td>340</td><td>12,400</td><td>2.7%</td><td>8.4</td></tr>
+            <tr><td>building automation</td><td>180</td><td>6,200</td><td>2.9%</td><td>6.1</td></tr>
+            <tr><td>hvac onderhoud</td><td>120</td><td>3,800</td><td>3.2%</td><td>7.2</td></tr>
+            <tr><td>energietransitie bedrijven</td><td>85</td><td>2,900</td><td>2.9%</td><td>9.8</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
-
-  <!-- GSC SECTION -->
-  <div class="section-sep">Google Search Console</div>
-
-  <!-- GSC Charts — g2 layout -->
-  <div class="g2">
-    <div class="card" style="margin:0">
-      <div class="card-hdr">
-        <div>
-          <div class="card-title">Impressions &amp; Clicks Trend</div>
-          <div class="card-sub">Monthly evolution — impressions as primary SEO exposure metric</div>
-        </div>
-      </div>
-      <div class="legend-row" id="gscTrendLegend"></div>
-      <canvas id="chartGSCtrend" height="80"></canvas>
+  <div class="int-card">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+      <span class="int-badge">CONNECTED</span>
+      <strong>Google Analytics 4</strong>
     </div>
-    <div class="card" style="margin:0">
-      <div class="card-hdr">
-        <div>
-          <div class="card-title">Average Position Evolution</div>
-          <div class="card-sub">Lower is better — inverted scale</div>
-        </div>
-      </div>
-      <canvas id="chartGSCposition" height="80"></canvas>
+    <div class="g3">
+      <div class="card" style="margin:0"><div class="kpi-label">Organic Sessions</div><div class="kpi-val">12,840</div><div class="kpi-cmp">vs last year: <span class="up">+18%</span></div></div>
+      <div class="card" style="margin:0"><div class="kpi-label">Bounce Rate (Organic)</div><div class="kpi-val">52.1%</div><div class="kpi-cmp">vs last year: <span class="dn">+2.3 pts</span></div></div>
+      <div class="card" style="margin:0"><div class="kpi-label">Organic Conversions</div><div class="kpi-val">284</div><div class="kpi-cmp">vs last year: <span class="up">+22%</span></div></div>
     </div>
-  </div>
-
-  <!-- GSC Performance by Label -->
-  <div class="card">
-    <div class="card-hdr">
-      <div>
-        <div class="card-title">Performance by Label</div>
-        <div class="card-sub">GSC metrics aligned with Semactic tracking labels — sorted by impressions</div>
-      </div>
-    </div>
-    <table>
-      <thead><tr><th>Label</th><th>Impressions</th><th>Clicks</th><th>Avg. Position</th><th>Panel Coverage</th></tr></thead>
-      <tbody>
-        <tr><td><span class="theme-badge" style="background:#ff9800">Facility &amp; Maintenance</span></td><td><strong>28,400</strong></td><td>1,245</td><td>6.2</td><td><span style="background:#d5f5e3;color:#1e8449;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">78%</span></td></tr>
-        <tr><td><span class="theme-badge" style="background:#1976d2">Equans Digital</span></td><td><strong>18,600</strong></td><td>856</td><td>11.5</td><td><span style="background:#fef6e8;color:#b8860b;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">42%</span></td></tr>
-        <tr><td><span class="theme-badge" style="background:#ef5350">Industry &amp; Infrastructure</span></td><td><strong>12,200</strong></td><td>482</td><td>9.8</td><td><span style="background:#d5f5e3;color:#1e8449;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">65%</span></td></tr>
-        <tr><td><span class="theme-badge" style="background:#ccc">No label</span></td><td><strong>8,900</strong></td><td>535</td><td>4.1</td><td><span style="background:#fde8e8;color:#c0392b;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">12%</span></td></tr>
-        <tr><td><span class="theme-badge" style="background:#26c6da">Carbon Shift</span></td><td><strong>7,400</strong></td><td>318</td><td>14.3</td><td><span style="background:#fde8e8;color:#c0392b;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">23%</span></td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- GSC Top Queries — sorted by Impressions -->
-  <div class="card">
-    <div class="card-hdr">
-      <div>
-        <div class="card-title">Top Queries</div>
-        <div class="card-sub">Sorted by impressions — tracking status and position trend</div>
-      </div>
-    </div>
-    <table>
-      <thead><tr><th>Query</th><th>Impressions</th><th>Clicks</th><th>Avg. Position</th><th>In Panel</th><th>Trend</th></tr></thead>
-      <tbody>
-        <tr><td>facility management belgium</td><td><strong>12,800</strong></td><td>385</td><td>5.4</td><td><span style="background:#d5f5e3;color:#1e8449;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">&#10003; Yes</span></td><td><span class="up">&#9650;</span></td></tr>
-        <tr><td>equans belgium</td><td><strong>8,450</strong></td><td>624</td><td>1.2</td><td><span style="background:#d5f5e3;color:#1e8449;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">&#10003; Yes</span></td><td><span style="color:#aaa">&#9654;</span></td></tr>
-        <tr><td>gebouwbeheer brussel</td><td><strong>6,200</strong></td><td>248</td><td>7.1</td><td><span style="background:#d5f5e3;color:#1e8449;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">&#10003; Yes</span></td><td><span class="dn">&#9660;</span></td></tr>
-        <tr><td>technisch gebouwbeheer</td><td><strong>5,600</strong></td><td>118</td><td>9.2</td><td><span style="background:#d5f5e3;color:#1e8449;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">&#10003; Yes</span></td><td><span style="color:#aaa">&#9654;</span></td></tr>
-        <tr><td>hvac onderhoud</td><td><strong>4,100</strong></td><td>186</td><td>6.8</td><td><span style="background:#d5f5e3;color:#1e8449;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">&#10003; Yes</span></td><td><span class="up">&#9650;</span></td></tr>
-        <tr><td>warmtepomp installatie prijs</td><td><strong>4,100</strong></td><td>48</td><td>18.7</td><td><span style="background:#eee;color:#888;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">&#10007; No</span></td><td><span class="up">&#9650;</span></td></tr>
-        <tr><td>energietransitie bedrijven</td><td><strong>3,800</strong></td><td>124</td><td>8.9</td><td><span style="background:#d5f5e3;color:#1e8449;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">&#10003; Yes</span></td><td><span class="dn">&#9660;</span></td></tr>
-        <tr><td>industri&euml;le elektriciteit</td><td><strong>3,200</strong></td><td>52</td><td>15.2</td><td><span style="background:#eee;color:#888;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">&#10007; No</span></td><td><span class="up">&#9650;</span></td></tr>
-        <tr><td>building automation belgium</td><td><strong>2,900</strong></td><td>95</td><td>11.3</td><td><span style="background:#d5f5e3;color:#1e8449;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">&#10003; Yes</span></td><td><span class="up">&#9650;</span></td></tr>
-        <tr><td>equans carri&egrave;re</td><td><strong>2,800</strong></td><td>156</td><td>2.1</td><td><span style="background:#eee;color:#888;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">&#10007; No</span></td><td><span style="color:#aaa">&#9654;</span></td></tr>
-        <tr><td>duurzame energie oplossingen</td><td><strong>2,400</strong></td><td>78</td><td>13.6</td><td><span style="background:#d5f5e3;color:#1e8449;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">&#10003; Yes</span></td><td><span class="dn">&#9660;</span></td></tr>
-        <tr><td>datacenter koeling</td><td><strong>1,850</strong></td><td>64</td><td>8.4</td><td><span style="background:#eee;color:#888;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">&#10007; No</span></td><td><span class="up">&#9650;</span></td></tr>
-        <tr><td>smart building technology</td><td><strong>1,600</strong></td><td>42</td><td>12.9</td><td><span style="background:#d5f5e3;color:#1e8449;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">&#10003; Yes</span></td><td><span class="dn">&#9660;</span></td></tr>
-        <tr><td>co2 reductie industrie</td><td><strong>1,200</strong></td><td>24</td><td>19.8</td><td><span style="background:#d5f5e3;color:#1e8449;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">&#10003; Yes</span></td><td><span class="dn">&#9660;</span></td></tr>
-        <tr><td>netcongestie oplossingen</td><td><strong>980</strong></td><td>28</td><td>22.4</td><td><span style="background:#d5f5e3;color:#1e8449;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">&#10003; Yes</span></td><td><span class="up">&#9650;</span></td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- Panel vs Non-panel -->
-  <div class="card">
-    <div class="card-hdr">
-      <div>
-        <div class="card-title">Panel vs Non-panel Performance</div>
-        <div class="card-sub">Validating the relevance of the 320 tracked keywords vs organic discovery</div>
-      </div>
-    </div>
-    <table>
-      <thead><tr><th>Segment</th><th>Keywords</th><th>Impressions</th><th>Clicks</th><th>Avg Position</th><th>% of Impressions</th></tr></thead>
-      <tbody>
-        <tr><td><strong style="color:#e8a838">&#9632; In Panel</strong> (tracked Semactic)</td><td>320</td><td><strong>48,200</strong></td><td>2,547</td><td>9.7</td><td><span style="background:#d5f5e3;color:#1e8449;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">73%</span></td></tr>
-        <tr><td><strong style="color:#aaa">&#9632; Out Panel</strong> (organic discovery)</td><td>~16,451</td><td><strong>17,800</strong></td><td>889</td><td>11.2</td><td><span style="background:#eee;color:#888;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">27%</span></td></tr>
-      </tbody>
-    </table>
-    <div class="method-box" style="margin-top:12px">
-      <strong>Insight:</strong> 73% of impressions come from the 320 tracked keywords, validating panel coverage. Out-panel queries generate proportionally more clicks per impression, suggesting untapped branded or transactional queries not yet tracked.
-    </div>
-  </div>
-
-  <!-- GA4 SECTION -->
-  <div class="section-sep">Google Analytics 4</div>
-
-  <div class="g2">
-    <div class="card" style="margin:0">
-      <div class="card-hdr">
-        <div>
-          <div class="card-title">Sessions &amp; Conversions Trend</div>
-          <div class="card-sub">Organic sessions (primary) and conversions (secondary)</div>
-        </div>
-      </div>
-      <div class="legend-row" id="ga4TrendLegend"></div>
-      <canvas id="chartGA4sessions" height="80"></canvas>
-    </div>
-    <div class="card" style="margin:0">
-      <div class="card-hdr">
-        <div>
-          <div class="card-title">Bounce Rate (Organic)</div>
-          <div class="card-sub">Current: 52.1% &middot; <span class="dn">+2.3 pts</span> vs last year</div>
-        </div>
-      </div>
-      <canvas id="chartGA4bounce" height="80"></canvas>
+    <div class="card">
+      <div class="card-title" style="margin-bottom:10px">Organic Sessions Trend</div>
+      <canvas id="chartGA4" height="70"></canvas>
     </div>
   </div>
 
@@ -530,266 +420,177 @@ const labelData = [
 // 0. Top 15 Organic Competitors — presence on tracked keywords
 const compColors=['#2ecc71','#e67e22','#9b59b6','#e74c3c','#3498db','#1abc9c','#f1c40f','#e91e63','#00bcd4','#8bc34a','#ff9800','#607d8b','#795548','#cddc39','#9c27b0'];
 const presenceData = [
-  {name:'vlaanderen.be',       kw:147},
-  {name:'vlao.be',             kw:97},
-  {name:'nl.wikipedia.org',    kw:92},
-  {name:'youtube.com',         kw:78},
-  {name:'milieucentraal.nl',   kw:65},
-  {name:'klimaat.be',          kw:45},
-  {name:'nos.nl',              kw:42},
-  {name:'nl.linkedin.com',     kw:38},
-  {name:'sep.com',             kw:37},
-  {name:'EQUANS.BE',           kw:37},
-  {name:'rijksoverheid.nl',    kw:37},
-  {name:'europarl.europa.eu',  kw:34},
-  {name:'economie.fgov.be',    kw:31},
-  {name:'vlab.be',             kw:33},
-  {name:'en.wikipedia.org',    kw:32},
-  {name:'fluvius.be',          kw:29},
+  {name:'vlaanderen.be',kw:147},{name:'vlao.be',kw:97},{name:'nl.wikipedia.org',kw:92},
+  {name:'youtube.com',kw:78},{name:'milieucentraal.nl',kw:65},{name:'klimaat.be',kw:45},
+  {name:'nos.nl',kw:42},{name:'nl.linkedin.com',kw:38},{name:'sep.com',kw:37},
+  {name:'EQUANS.BE',kw:37},{name:'rijksoverheid.nl',kw:37},{name:'europarl.europa.eu',kw:34},
+  {name:'economie.fgov.be',kw:31},{name:'vlab.be',kw:33},{name:'en.wikipedia.org',kw:32},
+  {name:'fluvius.be',kw:29},
 ];
 presenceData.forEach((d,i)=>d.color=compColors[i%compColors.length]);
 new Chart(document.getElementById('chartPresenceBar'),{
   type:'bar',
   data:{labels:presenceData.map(c=>c.name),datasets:[{data:presenceData.map(c=>c.kw),backgroundColor:presenceData.map(c=>c.color),borderRadius:2,barPercentage:.45,categoryPercentage:.92}]},
-  options:{
-    indexAxis:'y',
-    responsive:true,
-    maintainAspectRatio:false,
+  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
     plugins:{legend:{display:false},datalabels:{display:true,anchor:'end',align:'right',color:'#555',font:{size:9,weight:'bold'},formatter:v=>v}},
     scales:{x:{ticks:{font:{size:9}},grid:{color:'#ebe6dc'}},y:{ticks:{font:{size:9,weight:'600'},padding:1},grid:{display:false}}}
-  },
-  plugins:[ChartDataLabels]
+  },plugins:[ChartDataLabels]
 });
-// 1. Top 10 Coverage by Domain — horizontal bars with datalabels
-const visComp = [
-  {name:'equans.be',          top10:7.81, kw:25, color:C.orange},
-  {name:'se.com',             top10:3.12, kw:10, color:C.red},
-  {name:'honeywell.com',      top10:0.62, kw:2,  color:C.cyan},
-  {name:'siemens.be',         top10:0,    kw:0,  color:C.blue},
-  {name:'spie.be',            top10:0,    kw:0,  color:C.purple},
-  {name:'vinci-energies.be',  top10:0,    kw:0,  color:C.brown},
+const totalP=presenceData.reduce((s,d)=>s+d.kw,0);
+new Chart(document.getElementById('chartPresenceDonut'),{
+  type:'doughnut',
+  data:{labels:presenceData.map(d=>d.name),datasets:[{data:presenceData.map(d=>d.kw),backgroundColor:presenceData.map(d=>d.color),borderWidth:2,borderColor:'#faf7f2'}]},
+  options:{cutout:'55%',plugins:{
+    legend:{position:'right',labels:{font:{size:10},boxWidth:12,padding:10,generateLabels:chart=>{
+      return chart.data.labels.map((l,i)=>{const d=presenceData[i];const pct=totalP?(d.kw/totalP*100).toFixed(1):'0';return{text:l+' ('+pct+'%)',fillStyle:d.color,strokeStyle:'#faf7f2',lineWidth:2,index:i};});
+    }}},
+    datalabels:{display:ctx=>ctx.dataset.data[ctx.dataIndex]>0,color:'#fff',font:{size:11,weight:'bold'},formatter:(v)=>{const pct=totalP?(v/totalP*100).toFixed(1):'0';return pct+'%';}}
+  }},plugins:[ChartDataLabels]
+});
+
+// 1. Top 10 Coverage by Domain
+const visComp=[
+  {name:'equans.be',top10:7.81,kw:25,color:C.orange},{name:'se.com',top10:3.12,kw:10,color:C.red},
+  {name:'honeywell.com',top10:0.62,kw:2,color:C.cyan},{name:'siemens.be',top10:0,kw:0,color:C.blue},
+  {name:'spie.be',top10:0,kw:0,color:C.purple},{name:'vinci-energies.be',top10:0,kw:0,color:C.brown},
 ];
 new Chart(document.getElementById('chartVisBar'),{
   type:'bar',
   data:{labels:visComp.map(c=>c.name),datasets:[{data:visComp.map(c=>c.top10),backgroundColor:visComp.map(c=>c.color),borderRadius:3,barPercentage:.65}]},
-  options:{
-    indexAxis:'y',
-    plugins:{
-      legend:{display:false},
-      tooltip:{callbacks:{label:ctx=>{const c=visComp[ctx.dataIndex];return c.top10+'% — '+c.kw+' keywords';}}},
-      datalabels:{display:true,anchor:'end',align:'right',color:'#555',font:{size:11,weight:'bold'},formatter:(v,ctx)=>{const c=visComp[ctx.dataIndex];return v+'% ('+c.kw+')';}}
-    },
+  options:{indexAxis:'y',
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>{const c=visComp[ctx.dataIndex];return c.top10+'% — '+c.kw+' keywords';}}},
+      datalabels:{display:true,anchor:'end',align:'right',color:'#555',font:{size:11,weight:'bold'},formatter:(v,ctx)=>{const c=visComp[ctx.dataIndex];return v+'% ('+c.kw+')';}}},
     scales:{x:{ticks:{callback:v=>v+'%',font:{size:10}},grid:{color:'#ebe6dc'},max:12},y:{ticks:{font:{size:11,weight:'bold'}},grid:{display:false}}}
-  },
-  plugins:[ChartDataLabels]
+  },plugins:[ChartDataLabels]
 });
 
-// 2. SoV donut (traffic estimate)
+// 2. SoV donut
 const sovOv=[
-  {name:'equans.be',pct:78.7,traffic:'56',color:C.orange},
-  {name:'se.com',pct:19.6,traffic:'14',color:C.red},
-  {name:'honeywell.com',pct:1.7,traffic:'1',color:C.cyan},
-  {name:'spie.be',pct:0,traffic:'0',color:C.purple},
-  {name:'siemens.be',pct:0,traffic:'0',color:C.blue},
-  {name:'vinci-energies.be',pct:0,traffic:'0',color:C.brown},
+  {name:'equans.be',pct:78.7,traffic:'56',color:C.orange},{name:'se.com',pct:19.6,traffic:'14',color:C.red},
+  {name:'honeywell.com',pct:1.7,traffic:'1',color:C.cyan},{name:'spie.be',pct:0,traffic:'0',color:C.purple},
+  {name:'siemens.be',pct:0,traffic:'0',color:C.blue},{name:'vinci-energies.be',pct:0,traffic:'0',color:C.brown},
 ];
 new Chart(document.getElementById('sovOverviewDonut'),{
   type:'doughnut',
   data:{labels:sovOv.map(d=>d.name),datasets:[{data:sovOv.map(d=>d.pct),backgroundColor:sovOv.map(d=>d.color),borderWidth:2,borderColor:'#faf7f2'}]},
-  options:{
-    cutout:'55%',
-    plugins:{
-      legend:{position:'bottom',labels:{font:{size:9},boxWidth:8,padding:5,generateLabels:chart=>{
-        return chart.data.labels.map((l,i)=>{const d=sovOv[i];return{text:l+' — '+d.pct+'% ('+d.traffic+')',fillStyle:d.color,strokeStyle:'#faf7f2',lineWidth:2,index:i};});
-      }}},
-      tooltip:{callbacks:{label:ctx=>{const d=sovOv[ctx.dataIndex];return d.name+': '+d.pct+'% — est. '+d.traffic+' visits';}}},
-      datalabels:{display:ctx=>ctx.dataset.data[ctx.dataIndex]>0,color:'#fff',font:{size:13,weight:'bold'},formatter:v=>v+'%'}
-    }
-  },
-  plugins:[ChartDataLabels]
+  options:{cutout:'55%',plugins:{
+    legend:{position:'bottom',labels:{font:{size:10},boxWidth:10,padding:8,generateLabels:chart=>{
+      return chart.data.labels.map((l,i)=>{const d=sovOv[i];return{text:l+' — '+d.pct+'% ('+d.traffic+')',fillStyle:d.color,strokeStyle:'#faf7f2',lineWidth:2,index:i};});
+    }}},
+    tooltip:{callbacks:{label:ctx=>{const d=sovOv[ctx.dataIndex];return d.name+': '+d.pct+'% — est. '+d.traffic+' visits';}}},
+    datalabels:{display:ctx=>ctx.dataset.data[ctx.dataIndex]>0,color:'#fff',font:{size:13,weight:'bold'},formatter:v=>v+'%'}
+  }},plugins:[ChartDataLabels]
 });
 
-// 3. Visibility Trend — with value in legend + last-point label
+// 3. Visibility Trend
 const trendData=[
   {label:'equans.be',data:[0,0.5,1.0,1.8,2.5,3.2,3.8,4.5,5.0,5.8,6.5,7.2,7.8],color:C.orange,fill:true,dash:false},
   {label:'se.com',data:[1.5,1.7,1.9,2.0,2.1,2.2,2.3,2.5,2.6,2.7,2.8,3.0,3.1],color:C.red,fill:false,dash:true},
   {label:'honeywell.com',data:[0.2,0.2,0.3,0.3,0.3,0.4,0.4,0.4,0.5,0.5,0.5,0.6,0.6],color:C.cyan,fill:false,dash:true},
 ];
-// Build legend with current value
 const tl=document.getElementById('trendLegend');
-trendData.forEach(d=>{
-  const last=d.data[d.data.length-1];
-  tl.innerHTML+=`<span><span class="ldot" style="background:${d.color}"></span>${d.label} — <strong>${last}%</strong></span>`;
-});
+trendData.forEach(d=>{const last=d.data[d.data.length-1];tl.innerHTML+=`<span><span class="ldot" style="background:${d.color}"></span>${d.label} — <strong>${last}%</strong></span>`;});
 new Chart(document.getElementById('chartVisTrend'),{
   type:'line',
-  data:{
-    labels:months,
-    datasets:trendData.map(d=>({
-      label:d.label,data:d.data,borderColor:d.color,
-      backgroundColor:d.fill?'rgba(232,168,56,.08)':'transparent',
-      tension:.4,borderWidth:d.fill?2.5:2,pointRadius:1,pointHoverRadius:4,
-      borderDash:d.dash?[4,3]:[],fill:d.fill,
-    }))
-  },
-  options:{
-    plugins:{
-      legend:{display:false},
-      datalabels:{
-        display:ctx=>ctx.dataIndex===ctx.dataset.data.length-1,
-        anchor:'end',align:'right',color:ctx=>ctx.dataset.borderColor,
-        font:{size:10,weight:'bold'},formatter:v=>v+'%',offset:4
-      }
-    },
-    scales:{y:{ticks:{callback:v=>v+'%',font:{size:10}},grid:{color:'#ebe6dc'}},x:{ticks:{font:{size:10}},grid:{display:false}}}
-  },
+  data:{labels:months,datasets:trendData.map(d=>({label:d.label,data:d.data,borderColor:d.color,backgroundColor:d.fill?'rgba(232,168,56,.08)':'transparent',tension:.4,borderWidth:d.fill?2.5:2,pointRadius:1,pointHoverRadius:4,borderDash:d.dash?[4,3]:[],fill:d.fill}))},
+  options:{plugins:{legend:{display:false},datalabels:{display:ctx=>ctx.dataIndex===ctx.dataset.data.length-1,anchor:'end',align:'right',color:ctx=>ctx.dataset.borderColor,font:{size:10,weight:'bold'},formatter:v=>v+'%',offset:4}},
+    scales:{y:{ticks:{callback:v=>v+'%',font:{size:10}},grid:{color:'#ebe6dc'}},x:{ticks:{font:{size:10}},grid:{display:false}}}},
   plugins:[ChartDataLabels]
 });
 
-// 4. Fused Label Performance table (AI-era: Top 3, Top 10, Coverage, Leader, Status)
-const leaderMap={
-  'Facility & Maintenance':{leader:'equans.be',isYou:true,top3:4},
-  'Equans Digital':{leader:'equans.be',isYou:true,top3:2},
-  'Industry & Infrastructure':{leader:'equans.be',isYou:true,top3:1},
-  'Carbon Shift':{leader:'equans.be',isYou:true,top3:1},
-  'ET-campagne':{leader:'equans.be',isYou:true,top3:0},
-  'CO2 & cost reduction':{leader:'equans.be',isYou:true,top3:0},
-  'No label':{leader:'equans.be',isYou:true,top3:0},
-  'Electrification':{leader:'se.com',isYou:false,top3:0},
-  'Netcongestie':{leader:'se.com',isYou:false,top3:0},
-};
-const ft=document.getElementById('fusedLabelTable');
+// 4. Theme table
+const tb=document.getElementById('themeTableBody');
 labelData.forEach(t=>{
   const cov=(t.top10/t.kw*100).toFixed(1);
-  const ldr=leaderMap[t.name]||{leader:'—',isYou:false,top3:0};
-  const tag=ldr.isYou?'<span class="leader-tag leader-you">Equans</span>':`<span class="leader-tag leader-other">${ldr.leader}</span>`;
-  const statusStr=ldr.isYou
-    ?'<span style="background:#d5f5e3;color:#1e8449;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">&#10003; Leader</span>'
-    :'<span style="background:#fde8e8;color:#c0392b;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">Gap</span>';
-  const covBadge=parseFloat(cov)<5?'color:#c0392b;font-weight:700':parseFloat(cov)<15?'color:#b8860b;font-weight:600':'color:#1e8449;font-weight:700';
-  ft.innerHTML+=`<tr><td><span class="theme-badge" style="background:${t.color}">${t.name}</span></td><td><strong>${ldr.top3}</strong></td><td>${t.top10}</td><td style="${covBadge}">${cov}%</td><td>${tag}</td><td>${statusStr}</td></tr>`;
+  const isWeak=parseFloat(cov)<5;
+  const badge=isWeak?' <span style="background:#fde8e8;color:#c0392b;font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;margin-left:4px">LOW</span>':'';
+  const sovBadge=t.sov>=70?'background:#d5f5e3;color:#1e8449':t.sov>=30?'background:#fef6e8;color:#b8860b':'background:#fde8e8;color:#c0392b';
+  tb.innerHTML+=`<tr><td><span class="theme-badge" style="background:${t.color}">${t.name}</span></td><td>${t.vol.toLocaleString('de-DE')}</td><td><span style="${sovBadge};font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">${t.sov}%</span></td><td>${t.top10}</td><td>${cov}%${badge}</td><td>${t.kw}</td></tr>`;
 });
 
 // Theme pie
 new Chart(document.getElementById('chartThemePie'),{
   type:'pie',
   data:{labels:labelData.map(t=>t.name),datasets:[{data:labelData.map(t=>t.vol),backgroundColor:labelData.map(t=>t.color),borderWidth:2,borderColor:'#faf7f2'}]},
-  options:{plugins:{legend:{position:'right',labels:{font:{size:8},boxWidth:8,padding:4}},datalabels:{display:ctx=>ctx.dataset.data[ctx.dataIndex]>0,color:'#fff',font:{size:11,weight:'bold'},formatter:(v,ctx)=>{const total=ctx.dataset.data.reduce((a,b)=>a+b,0);return(v/total*100).toFixed(0)+'%';}}}}
-  ,plugins:[ChartDataLabels]
+  options:{plugins:{legend:{position:'right',labels:{font:{size:9},boxWidth:10,padding:6}},datalabels:{display:ctx=>ctx.dataset.data[ctx.dataIndex]>0,color:'#fff',font:{size:12,weight:'bold'},formatter:(v,ctx)=>{const total=ctx.dataset.data.reduce((a,b)=>a+b,0);return(v/total*100).toFixed(0)+'%';}}}},
+  plugins:[ChartDataLabels]
 });
 
+// 5. Category Leaders
+const leaders=[
+  {label:'Facility & Maintenance',leader:'equans.be',leaderPct:22.5,youPct:22.5,isYou:true},
+  {label:'Equans Digital',leader:'equans.be',leaderPct:8.2,youPct:8.2,isYou:true},
+  {label:'Industry & Infrastructure',leader:'equans.be',leaderPct:15.4,youPct:15.4,isYou:true},
+  {label:'Carbon Shift',leader:'equans.be',leaderPct:2.9,youPct:2.9,isYou:true},
+  {label:'ET-campagne',leader:'equans.be',leaderPct:2.4,youPct:2.4,isYou:true},
+  {label:'CO2 & cost reduction',leader:'equans.be',leaderPct:5.0,youPct:5.0,isYou:true},
+];
+const lt=document.getElementById('leaderTable');
+leaders.forEach(l=>{
+  let statusStr;
+  if(l.isYou){statusStr='<span style="background:#d5f5e3;color:#1e8449;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">&#10003; Leader</span>';}
+  else{const diff=Math.abs(l.leaderPct-l.youPct);statusStr=diff<=10?'<span style="background:#fef6e8;color:#b8860b;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">Close behind</span>':'<span style="background:#fde8e8;color:#c0392b;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">Far behind</span>';}
+  const tag=l.isYou?'<span class="leader-tag leader-you">Equans</span>':`<span class="leader-tag leader-other">${l.leader}</span>`;
+  lt.innerHTML+=`<tr><td><strong>${l.label}</strong></td><td>${tag}</td><td>${l.leaderPct}%</td><td>${l.youPct}%</td><td>${statusStr}</td></tr>`;
+});
 
-// 7. Radar 1 — Equans vs se.com (7 labels)
-const rLabels1=['Fac. & Maint.','Digital','Industry','Carbon','ET-camp.','CO2 Reduc.','No label'];
+// 6. Priority Labels
+const priorityData=[
+  {label:'Netcongestie',color:C.pink,cov:'0.0%',nr:'10 / 10',vol:'0',prio:'high'},
+  {label:'Electrification',color:C.amber,cov:'0.0%',nr:'5 / 5',vol:'0',prio:'high'},
+  {label:'Carbon Shift',color:C.cyan,cov:'2.9%',nr:'99 / 102',vol:'7.8',prio:'high'},
+  {label:'ET-campagne',color:C.purple,cov:'2.4%',nr:'40 / 41',vol:'0.5',prio:'high'},
+  {label:'CO2 & cost reduction',color:C.brown,cov:'5.0%',nr:'19 / 20',vol:'0.5',prio:'medium'},
+  {label:'Equans Digital',color:C.blue,cov:'8.2%',nr:'134 / 146',vol:'20.3',prio:'medium'},
+  {label:'Industry & Infrastructure',color:C.red,cov:'15.4%',nr:'11 / 13',vol:'15.2',prio:'medium'},
+  {label:'No label',color:'#ccc',cov:'20.0%',nr:'12 / 15',vol:'8.0',prio:'low'},
+  {label:'Facility & Maintenance',color:C.orange,cov:'22.5%',nr:'31 / 40',vol:'23.2',prio:'low'},
+];
+const pt=document.getElementById('priorityTable');
+priorityData.forEach(d=>{
+  const prioStyle=d.prio==='high'?'background:#fde8e8;color:#c0392b':d.prio==='medium'?'background:#fef6e8;color:#b8860b':'background:#eee;color:#888';
+  const prioLabel=d.prio==='high'?'&#9650; High':d.prio==='medium'?'&#9644; Medium':'&#9660; Low';
+  pt.innerHTML+=`<tr><td><span class="theme-badge" style="background:${d.color}">${d.label}</span></td><td>${d.cov}</td><td>${d.nr}</td><td>${d.vol}</td><td><span style="${prioStyle};font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">${prioLabel}</span></td></tr>`;
+});
+
+// 7. Radar 1 — Period 1 (27-03-2025) — fictive data
+const rLabels=['Fac. & Maint.','Equans Digital','Carbon Shift','Industry & Infra','ET-campagne'];
 new Chart(document.getElementById('chartRadar1'),{
   type:'radar',
-  data:{labels:rLabels1,datasets:[
-    {label:'equans.be',data:[22.5,8.2,15.4,2.9,2.4,5.0,20.0],borderColor:C.orange,backgroundColor:'rgba(232,168,56,.12)',borderWidth:2.5,pointRadius:3},
-    {label:'se.com',data:[12.5,6.2,7.7,1.0,0,0,0],borderColor:C.red,backgroundColor:C.red+'18',borderWidth:2,pointRadius:2},
+  data:{labels:rLabels,datasets:[
+    {label:'equans.be',data:[12.5,3.4,1.0,8.2,0],borderColor:C.orange,backgroundColor:'rgba(232,168,56,.12)',borderWidth:2.5,pointRadius:3},
+    {label:'se.com',data:[18.8,8.2,2.0,10.8,0],borderColor:C.red,backgroundColor:C.red+'18',borderWidth:2,pointRadius:2},
+    {label:'honeywell.com',data:[5.0,2.8,0,1.5,0],borderColor:C.cyan,backgroundColor:C.cyan+'18',borderWidth:2,pointRadius:2},
   ]},
-  options:{plugins:{legend:{position:'bottom',labels:{font:{size:11}}},datalabels:{display:false}},scales:{r:{beginAtZero:true,ticks:{font:{size:10},backdropColor:'transparent'},grid:{color:'#ebe6dc'},pointLabels:{font:{size:11}}}}}
+  options:{plugins:{legend:{display:false},datalabels:{display:false}},scales:{r:{beginAtZero:true,ticks:{font:{size:9},backdropColor:'transparent'},grid:{color:'#ebe6dc'},pointLabels:{font:{size:10}}}}}
 });
 
-// Radar 2 — All Competitors (9 labels)
-const rLabels2=['Facility','Digital','Industry','No label','Carbon','CO2 Reduc.','ET-camp.','Electrif.','Netcongest.'];
+// Radar 2 — Period 2 (21-04-2026) — fictive data
 new Chart(document.getElementById('chartRadar2'),{
   type:'radar',
-  data:{labels:rLabels2,datasets:[
-    {label:'equans.be',data:[22.5,8.2,15.4,20.0,2.9,5.0,2.4,0,0],borderColor:C.orange,backgroundColor:'rgba(232,168,56,.15)',borderWidth:2.5,pointRadius:3},
-    {label:'se.com',data:[12.5,6.2,7.7,0,1.0,0,0,0,0],borderColor:C.red,backgroundColor:C.red+'18',borderWidth:2,pointRadius:2,borderDash:[4,3]},
-    {label:'honeywell.com',data:[2.5,1.4,0,0,0,0,0,0,0],borderColor:C.cyan,backgroundColor:C.cyan+'18',borderWidth:2,pointRadius:2,borderDash:[2,2]},
+  data:{labels:rLabels,datasets:[
+    {label:'equans.be',data:[22.5,8.2,2.9,15.4,2.4],borderColor:C.orange,backgroundColor:'rgba(232,168,56,.12)',borderWidth:2.5,pointRadius:3},
+    {label:'se.com',data:[12.5,6.2,1.0,7.7,0],borderColor:C.red,backgroundColor:C.red+'18',borderWidth:2,pointRadius:2},
+    {label:'honeywell.com',data:[2.5,1.4,0,0,0],borderColor:C.cyan,backgroundColor:C.cyan+'18',borderWidth:2,pointRadius:2},
   ]},
-  options:{plugins:{legend:{position:'bottom',labels:{font:{size:11}}},datalabels:{display:false}},scales:{r:{beginAtZero:true,ticks:{font:{size:10},backdropColor:'transparent'},grid:{color:'#ebe6dc'},pointLabels:{font:{size:10}}}}}
+  options:{plugins:{legend:{display:false},datalabels:{display:false}},scales:{r:{beginAtZero:true,ticks:{font:{size:9},backdropColor:'transparent'},grid:{color:'#ebe6dc'},pointLabels:{font:{size:10}}}}}
 });
 
 // ══════════════════════════════════════════
 // TAB 2 — CONNECTED DATA
 // ══════════════════════════════════════════
-
-// GSC Impressions & Clicks Trend (dual-axis, impressions primary)
-const impressionsData=[18000,22000,26000,30000,34000,38000,42000,46000,50000,54000,58000,62000,66000];
-const clicksData=[420,480,520,580,640,710,780,850,920,980,1050,1120,1180];
-const gscTL=document.getElementById('gscTrendLegend');
-gscTL.innerHTML=`<span><span class="ldot" style="background:${C.orange}"></span>Impressions — <strong>66,000</strong></span><span><span class="ldot" style="background:${C.green}"></span>Clicks — <strong>1,180</strong></span>`;
-new Chart(document.getElementById('chartGSCtrend'),{
+new Chart(document.getElementById('chartGSC'),{
   type:'line',
   data:{labels:months,datasets:[
-    {label:'Impressions',data:impressionsData,borderColor:C.orange,backgroundColor:'rgba(232,168,56,.08)',borderWidth:2.5,tension:.35,pointRadius:1,pointHoverRadius:4,fill:true,yAxisID:'yImpr'},
-    {label:'Clicks',data:clicksData,borderColor:C.green,borderWidth:2,tension:.35,pointRadius:1,pointHoverRadius:4,fill:false,yAxisID:'yClicks'},
+    {label:'Clicks',data:[420,480,520,580,640,710,780,850,920,980,1050,1120,1180],borderColor:C.green,borderWidth:2,tension:.35,pointRadius:2,fill:false},
+    {label:'Impressions (k)',data:[18,22,26,30,34,38,42,46,50,54,58,62,66],borderColor:C.pink,borderWidth:2,tension:.35,pointRadius:2,borderDash:[4,3],fill:false,yAxisID:'y1'},
   ]},
-  options:{
-    plugins:{legend:{display:false},datalabels:{
-      display:ctx=>ctx.dataIndex===ctx.dataset.data.length-1,
-      anchor:'end',align:'right',color:ctx=>ctx.dataset.borderColor,
-      font:{size:9,weight:'bold'},formatter:v=>v>=1000?(v/1000).toFixed(v>=10000?0:1)+'K':v,offset:4
-    }},
-    scales:{
-      yImpr:{position:'left',ticks:{font:{size:9},callback:v=>(v/1000)+'K'},grid:{color:'#ebe6dc'}},
-      yClicks:{position:'right',ticks:{font:{size:9}},grid:{display:false}},
-      x:{ticks:{font:{size:9}},grid:{display:false}}
-    }
-  },
-  plugins:[ChartDataLabels]
+  options:{plugins:{legend:{labels:{font:{size:10},boxWidth:10}},datalabels:{display:false}},scales:{y:{ticks:{font:{size:10}},grid:{color:'#ebe6dc'}},y1:{position:'right',ticks:{font:{size:10},callback:v=>v+'k'},grid:{display:false}},x:{ticks:{font:{size:10}},grid:{display:false}}}}
 });
-
-// GSC Average Position Evolution (inverted — lower is better)
-const posData=[18.5,17.8,17.2,16.5,15.8,15.2,14.6,14.0,13.5,13.1,12.8,12.6,12.4];
-new Chart(document.getElementById('chartGSCposition'),{
+new Chart(document.getElementById('chartGA4'),{
   type:'line',
-  data:{labels:months,datasets:[{
-    label:'Avg. Position',data:posData,borderColor:C.blue,backgroundColor:'rgba(25,118,210,.08)',borderWidth:2.5,tension:.35,pointRadius:2,pointHoverRadius:5,fill:true
-  }]},
-  options:{
-    plugins:{legend:{display:false},datalabels:{
-      display:ctx=>ctx.dataIndex===ctx.dataset.data.length-1,
-      anchor:'end',align:'left',color:C.blue,font:{size:10,weight:'bold'},formatter:v=>v.toFixed(1),offset:4
-    }},
-    scales:{y:{reverse:true,ticks:{font:{size:9}},grid:{color:'#ebe6dc'},title:{display:true,text:'Position (lower = better)',font:{size:9},color:'#aaa'}},x:{ticks:{font:{size:9}},grid:{display:false}}}
-  },
-  plugins:[ChartDataLabels]
-});
-
-// GA4 Sessions & Conversions (dual-axis)
-const sessionsData=[680,780,880,960,1040,1120,1200,1280,1360,1440,1520,1600,1680];
-const convData=[12,14,16,18,20,22,24,26,28,30,32,34,36];
-const ga4TL=document.getElementById('ga4TrendLegend');
-ga4TL.innerHTML=`<span><span class="ldot" style="background:${C.orange}"></span>Sessions — <strong>1,680</strong></span><span><span class="ldot" style="background:${C.cyan}"></span>Conversions — <strong>36</strong></span>`;
-new Chart(document.getElementById('chartGA4sessions'),{
-  type:'line',
-  data:{labels:months,datasets:[
-    {label:'Sessions',data:sessionsData,borderColor:C.orange,backgroundColor:'rgba(232,168,56,.08)',borderWidth:2.5,tension:.35,pointRadius:1,fill:true,yAxisID:'ySess'},
-    {label:'Conversions',data:convData,borderColor:C.cyan,borderWidth:2,tension:.35,pointRadius:1,borderDash:[4,3],fill:false,yAxisID:'yConv'},
-  ]},
-  options:{
-    plugins:{legend:{display:false},datalabels:{
-      display:ctx=>ctx.dataIndex===ctx.dataset.data.length-1,
-      anchor:'end',align:'right',color:ctx=>ctx.dataset.borderColor,
-      font:{size:9,weight:'bold'},offset:4
-    }},
-    scales:{
-      ySess:{position:'left',ticks:{font:{size:9}},grid:{color:'#ebe6dc'}},
-      yConv:{position:'right',ticks:{font:{size:9}},grid:{display:false}},
-      x:{ticks:{font:{size:9}},grid:{display:false}}
-    }
-  },
-  plugins:[ChartDataLabels]
-});
-
-// GA4 Bounce Rate
-const bounceData=[54.2,53.8,53.5,53.1,52.8,52.6,52.4,52.3,52.2,52.1,52.1,52.0,52.1];
-new Chart(document.getElementById('chartGA4bounce'),{
-  type:'line',
-  data:{labels:months,datasets:[{
-    label:'Bounce Rate',data:bounceData,borderColor:C.red,backgroundColor:'rgba(239,83,80,.06)',borderWidth:2,tension:.35,pointRadius:2,fill:true
-  }]},
-  options:{
-    plugins:{legend:{display:false},datalabels:{
-      display:ctx=>ctx.dataIndex===ctx.dataset.data.length-1,
-      anchor:'end',align:'left',color:C.red,font:{size:10,weight:'bold'},formatter:v=>v+'%',offset:4
-    }},
-    scales:{y:{ticks:{font:{size:9},callback:v=>v+'%'},grid:{color:'#ebe6dc'},suggestedMin:50,suggestedMax:56},x:{ticks:{font:{size:9}},grid:{display:false}}}
-  },
-  plugins:[ChartDataLabels]
+  data:{labels:months,datasets:[{label:'Organic Sessions',data:[680,780,880,960,1040,1120,1200,1280,1360,1440,1520,1600,1680],borderColor:C.orange,backgroundColor:'rgba(232,168,56,.1)',borderWidth:2,tension:.35,pointRadius:2,fill:true}]},
+  options:{plugins:{legend:{display:false},datalabels:{display:false}},scales:{y:{ticks:{font:{size:10}},grid:{color:'#ebe6dc'}},x:{ticks:{font:{size:10}},grid:{display:false}}}}
 });
 </script>
 </body>
