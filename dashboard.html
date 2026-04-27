@@ -153,19 +153,31 @@
 <div id="tab-overview" class="tab-content active">
 <div class="content">
 
-  <!-- 1. KPIs — 2 strategic cards -->
-  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:18px">
+  <!-- 1. KPIs — 4 DataForSEO cards -->
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px">
     <div class="kpi-card">
-      <span class="ci">&#9432;<span class="tip">Share of panel traffic potential vs tracked competitors. Calculated as est. clicks(equans) / est. clicks(all domains) on 320 keywords.</span></span>
+      <span class="ci">&#9432;<span class="tip">Share of panel traffic potential vs tracked competitors. SOV = &Sigma;(CTR &times; volume) your keywords / &Sigma;(CTR &times; volume) all domains. Source: SERP API + Keyword Data API.</span></span>
       <div class="kpi-label">SEO Share of Voice</div>
       <div class="kpi-val accent">78.7%</div>
       <div class="kpi-cmp"><span class="up">&#9650; +5.2 pts</span> vs previous period &middot; 320 kw panel</div>
     </div>
     <div class="kpi-card">
-      <span class="ci">&#9432;<span class="tip">Keywords in positions 1–10 / total tracked keywords (320).</span></span>
-      <div class="kpi-label">Top 10 Coverage</div>
+      <span class="ci">&#9432;<span class="tip">Keywords in positions 1–10 / total tracked keywords (320). Source: SERP API + DataForSEO Labs Ranked Keywords.</span></span>
+      <div class="kpi-label">Ranked Keywords Coverage</div>
       <div class="kpi-val">7.8%</div>
       <div class="kpi-cmp"><span class="up">&#9650; +2.3 pts</span> vs previous period &middot; 25 / 320 keywords</div>
+    </div>
+    <div class="kpi-card">
+      <span class="ci">&#9432;<span class="tip">Weighted visibility score = &Sigma;(search volume &times; CTR weight by position). Higher = more visible on high-volume keywords. Source: SERP API + Keyword Data API.</span></span>
+      <div class="kpi-label">Visibility Score</div>
+      <div class="kpi-val">12,450</div>
+      <div class="kpi-cmp"><span class="up">&#9650; +1,830</span> vs previous period &middot; volume-weighted</div>
+    </div>
+    <div class="kpi-card">
+      <span class="ci">&#9432;<span class="tip">Competitive Position Index = avg(your position &minus; competitor position) on shared keywords. Positive = you are ahead. Source: SERP API + DataForSEO Labs SERP Competitors.</span></span>
+      <div class="kpi-label">CPI vs se.com</div>
+      <div class="kpi-val" style="color:#27ae60">+2.5</div>
+      <div class="kpi-cmp"><span class="up">&#9650; +1.8</span> vs previous period &middot; avg. position gap</div>
     </div>
   </div>
 
