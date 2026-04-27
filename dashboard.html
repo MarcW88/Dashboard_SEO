@@ -153,31 +153,31 @@
 <div id="tab-overview" class="tab-content active">
 <div class="content">
 
-  <!-- 1. KPIs — 4 DataForSEO cards -->
+  <!-- 1. KPIs — 4 AI-era cards (no click dependency) -->
   <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px">
     <div class="kpi-card">
-      <span class="ci">&#9432;<span class="tip">Share of panel traffic potential vs tracked competitors. SOV = &Sigma;(CTR &times; volume) your keywords / &Sigma;(CTR &times; volume) all domains. Source: SERP API + Keyword Data API.</span></span>
+      <span class="ci">&#9432;<span class="tip">Share of panel visibility vs tracked competitors. SOV = &Sigma;(CTR &times; volume) your keywords / &Sigma;(CTR &times; volume) all domains on 320 keywords. Source: SERP API + Keyword Data API.</span></span>
       <div class="kpi-label">SEO Share of Voice</div>
       <div class="kpi-val accent">78.7%</div>
-      <div class="kpi-cmp"><span class="up">&#9650; +5.2 pts</span> vs previous period &middot; 320 kw panel</div>
+      <div class="kpi-cmp"><span class="up">&#9650; +5.2 pts</span> vs previous period &middot; vs se.com 19.6%</div>
     </div>
     <div class="kpi-card">
-      <span class="ci">&#9432;<span class="tip">Keywords in positions 1–10 / total tracked keywords (320). Source: SERP API + DataForSEO Labs Ranked Keywords.</span></span>
-      <div class="kpi-label">Ranked Keywords Coverage</div>
-      <div class="kpi-val">7.8%</div>
-      <div class="kpi-cmp"><span class="up">&#9650; +2.3 pts</span> vs previous period &middot; 25 / 320 keywords</div>
+      <span class="ci">&#9432;<span class="tip">Keywords ranked in positions 1–3 (AI-resistant zone). Top 3 = still visible above AI Overviews, highest brand exposure. Source: SERP API.</span></span>
+      <div class="kpi-label">Top 3 Keywords</div>
+      <div class="kpi-val">8</div>
+      <div class="kpi-cmp"><span class="up">&#9650; +4 kw</span> vs previous period &middot; AI-resistant zone</div>
     </div>
     <div class="kpi-card">
-      <span class="ci">&#9432;<span class="tip">Weighted visibility score = &Sigma;(search volume &times; CTR weight by position). Higher = more visible on high-volume keywords. Source: SERP API + Keyword Data API.</span></span>
-      <div class="kpi-label">Visibility Score</div>
-      <div class="kpi-val">12,450</div>
-      <div class="kpi-cmp"><span class="up">&#9650; +1,830</span> vs previous period &middot; volume-weighted</div>
+      <span class="ci">&#9432;<span class="tip">Keywords ranked in positions 1–10 / total tracked keywords (320). Measures panel coverage. Source: SERP API + DataForSEO Labs.</span></span>
+      <div class="kpi-label">Top 10 Keywords</div>
+      <div class="kpi-val">25</div>
+      <div class="kpi-cmp"><span class="up">&#9650; +13 kw</span> vs previous period &middot; 7.8% of panel</div>
     </div>
     <div class="kpi-card">
-      <span class="ci">&#9432;<span class="tip">Competitive Position Index = avg(your position &minus; competitor position) on shared keywords. Positive = you are ahead. Source: SERP API + DataForSEO Labs SERP Competitors.</span></span>
-      <div class="kpi-label">CPI vs se.com</div>
-      <div class="kpi-val" style="color:#27ae60">+2.5</div>
-      <div class="kpi-cmp"><span class="up">&#9650; +1.8</span> vs previous period &middot; avg. position gap</div>
+      <span class="ci">&#9432;<span class="tip">Average ranking position across all keywords where Equans appears. Lower = better. Source: SERP API.</span></span>
+      <div class="kpi-label">Avg. Position</div>
+      <div class="kpi-val">18.2</div>
+      <div class="kpi-cmp"><span class="up">&#9650; -4.2 pos</span> improvement &middot; vs se.com 22.4</div>
     </div>
   </div>
 
@@ -227,7 +227,7 @@
         </div>
       </div>
       <table>
-        <thead><tr><th>Label</th><th>Est. Traffic</th><th>Equans SoV</th><th>Top 10 Cov.</th><th>Leader</th><th>Gap vs Leader</th></tr></thead>
+        <thead><tr><th>Label</th><th>Top 3 KW</th><th>Top 10 KW</th><th>Coverage %</th><th>Leader</th><th>Status</th></tr></thead>
         <tbody id="fusedLabelTable"></tbody>
       </table>
     </div>
@@ -238,19 +238,48 @@
     </div>
   </div>
 
-  <!-- 5. PRIORITY LABELS (merged opportunities) -->
-  <div class="section-sep">Priority Labels</div>
-  <div class="card">
-    <div class="card-hdr">
-      <div>
-        <div class="card-title">Priority Labels</div>
-        <div class="card-sub">Labels ranked by opportunity: low coverage + high untapped volume</div>
+  <!-- 5. GROWTH OPPORTUNITIES (AI-era — no click estimates) -->
+  <div class="section-sep">Growth Opportunities</div>
+  <div class="g3">
+    <div class="card" style="margin:0">
+      <div class="card-hdr" style="margin-bottom:8px">
+        <div>
+          <div class="card-title" style="color:#e8a838">Top 3 Quick Wins</div>
+          <div class="card-sub">Keywords pos 4–10 &rarr; push to Top 3 (AI-resistant zone)</div>
+        </div>
+      </div>
+      <div class="kpi-val" style="font-size:28px">18</div>
+      <div class="kpi-cmp" style="margin-top:4px">keywords to optimize for Top 3</div>
+      <div class="method-box" style="margin-top:10px;font-size:10px">
+        Top 3 = highest brand visibility even with AI Overviews. These 18 keywords are already Top 10 — small optimization effort, high reward.
       </div>
     </div>
-    <table>
-      <thead><tr><th>Label</th><th>Top 10 Coverage</th><th>Not Ranked</th><th>Est. Traffic</th><th>Priority</th></tr></thead>
-      <tbody id="priorityTable"></tbody>
-    </table>
+    <div class="card" style="margin:0">
+      <div class="card-hdr" style="margin-bottom:8px">
+        <div>
+          <div class="card-title" style="color:#ef5350">Competitive Gaps</div>
+          <div class="card-sub">Keywords where se.com is Top 10 but Equans is not</div>
+        </div>
+      </div>
+      <div class="kpi-val" style="font-size:28px">186</div>
+      <div class="kpi-cmp" style="margin-top:4px">keywords — territory to conquer</div>
+      <div class="method-box" style="margin-top:10px;font-size:10px">
+        se.com ranks Top 10 on 186 keywords where Equans is absent. Each conquered keyword = competitive ground gained.
+      </div>
+    </div>
+    <div class="card" style="margin:0">
+      <div class="card-hdr" style="margin-bottom:8px">
+        <div>
+          <div class="card-title" style="color:#27ae60">Coverage Goal (6 months)</div>
+          <div class="card-sub">Target: double Top 10 coverage from 25 to 48 keywords</div>
+        </div>
+      </div>
+      <div class="kpi-val" style="font-size:28px">48</div>
+      <div class="kpi-cmp" style="margin-top:4px">target keywords Top 10 &middot; +92% growth</div>
+      <div class="method-box" style="margin-top:10px;font-size:10px">
+        Current: 25/320 (7.8%) &rarr; Target: 48/320 (15%). Coverage growth independent of CTR evolution in AI-era.
+      </div>
+    </div>
   </div>
 
   <!-- 7. STRENGTHS / WEAKNESSES RADAR — 2 periods -->
@@ -614,32 +643,28 @@ new Chart(document.getElementById('chartVisTrend'),{
   plugins:[ChartDataLabels]
 });
 
-// 4. Fused Label Performance table (Theme Analysis + Category Leaders)
+// 4. Fused Label Performance table (AI-era: Top 3, Top 10, Coverage, Leader, Status)
 const leaderMap={
-  'Facility & Maintenance':{leader:'equans.be',leaderPct:22.5,isYou:true},
-  'Equans Digital':{leader:'equans.be',leaderPct:8.2,isYou:true},
-  'Industry & Infrastructure':{leader:'equans.be',leaderPct:15.4,isYou:true},
-  'Carbon Shift':{leader:'equans.be',leaderPct:2.9,isYou:true},
-  'ET-campagne':{leader:'equans.be',leaderPct:2.4,isYou:true},
-  'CO2 & cost reduction':{leader:'equans.be',leaderPct:5.0,isYou:true},
-  'No label':{leader:'equans.be',leaderPct:20.0,isYou:true},
-  'Electrification':{leader:'se.com',leaderPct:4.0,isYou:false},
-  'Netcongestie':{leader:'se.com',leaderPct:2.0,isYou:false},
+  'Facility & Maintenance':{leader:'equans.be',isYou:true,top3:4},
+  'Equans Digital':{leader:'equans.be',isYou:true,top3:2},
+  'Industry & Infrastructure':{leader:'equans.be',isYou:true,top3:1},
+  'Carbon Shift':{leader:'equans.be',isYou:true,top3:1},
+  'ET-campagne':{leader:'equans.be',isYou:true,top3:0},
+  'CO2 & cost reduction':{leader:'equans.be',isYou:true,top3:0},
+  'No label':{leader:'equans.be',isYou:true,top3:0},
+  'Electrification':{leader:'se.com',isYou:false,top3:0},
+  'Netcongestie':{leader:'se.com',isYou:false,top3:0},
 };
 const ft=document.getElementById('fusedLabelTable');
 labelData.forEach(t=>{
   const cov=(t.top10/t.kw*100).toFixed(1);
-  const sovBadge=t.sov>=70?'background:#d5f5e3;color:#1e8449':t.sov>=30?'background:#fef6e8;color:#b8860b':'background:#fde8e8;color:#c0392b';
-  const ldr=leaderMap[t.name]||{leader:'—',leaderPct:0,isYou:false};
+  const ldr=leaderMap[t.name]||{leader:'—',isYou:false,top3:0};
   const tag=ldr.isYou?'<span class="leader-tag leader-you">Equans</span>':`<span class="leader-tag leader-other">${ldr.leader}</span>`;
-  let gapStr;
-  if(ldr.isYou){
-    gapStr='<span style="background:#d5f5e3;color:#1e8449;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">&#10003; Leader</span>';
-  }else{
-    const diff=(parseFloat(cov)-ldr.leaderPct).toFixed(1);
-    gapStr=`<span style="background:#fde8e8;color:#c0392b;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">${diff} pts</span>`;
-  }
-  ft.innerHTML+=`<tr><td><span class="theme-badge" style="background:${t.color}">${t.name}</span></td><td>${t.vol.toLocaleString('de-DE')}</td><td><span style="${sovBadge};font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">${t.sov}%</span></td><td>${cov}%</td><td>${tag}</td><td>${gapStr}</td></tr>`;
+  const statusStr=ldr.isYou
+    ?'<span style="background:#d5f5e3;color:#1e8449;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">&#10003; Leader</span>'
+    :'<span style="background:#fde8e8;color:#c0392b;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">Gap</span>';
+  const covBadge=parseFloat(cov)<5?'color:#c0392b;font-weight:700':parseFloat(cov)<15?'color:#b8860b;font-weight:600':'color:#1e8449;font-weight:700';
+  ft.innerHTML+=`<tr><td><span class="theme-badge" style="background:${t.color}">${t.name}</span></td><td><strong>${ldr.top3}</strong></td><td>${t.top10}</td><td style="${covBadge}">${cov}%</td><td>${tag}</td><td>${statusStr}</td></tr>`;
 });
 
 // Theme pie
@@ -650,24 +675,6 @@ new Chart(document.getElementById('chartThemePie'),{
   ,plugins:[ChartDataLabels]
 });
 
-// 6. Priority Labels — merged single table
-const priorityData=[
-  {label:'Netcongestie',color:C.pink,cov:'0.0%',nr:'10 / 10',vol:'0',prio:'high'},
-  {label:'Electrification',color:C.amber,cov:'0.0%',nr:'5 / 5',vol:'0',prio:'high'},
-  {label:'Carbon Shift',color:C.cyan,cov:'2.9%',nr:'99 / 102',vol:'7.8',prio:'high'},
-  {label:'ET-campagne',color:C.purple,cov:'2.4%',nr:'40 / 41',vol:'0.5',prio:'high'},
-  {label:'CO2 & cost reduction',color:C.brown,cov:'5.0%',nr:'19 / 20',vol:'0.5',prio:'medium'},
-  {label:'Equans Digital',color:C.blue,cov:'8.2%',nr:'134 / 146',vol:'20.3',prio:'medium'},
-  {label:'Industry & Infrastructure',color:C.red,cov:'15.4%',nr:'11 / 13',vol:'15.2',prio:'medium'},
-  {label:'No label',color:'#ccc',cov:'20.0%',nr:'12 / 15',vol:'8.0',prio:'low'},
-  {label:'Facility & Maintenance',color:C.orange,cov:'22.5%',nr:'31 / 40',vol:'23.2',prio:'low'},
-];
-const pt=document.getElementById('priorityTable');
-priorityData.forEach(d=>{
-  const prioStyle=d.prio==='high'?'background:#fde8e8;color:#c0392b':d.prio==='medium'?'background:#fef6e8;color:#b8860b':'background:#eee;color:#888';
-  const prioLabel=d.prio==='high'?'&#9650; High':d.prio==='medium'?'&#9644; Medium':'&#9660; Low';
-  pt.innerHTML+=`<tr><td><span class="theme-badge" style="background:${d.color}">${d.label}</span></td><td>${d.cov}</td><td>${d.nr}</td><td>${d.vol}</td><td><span style="${prioStyle};font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px">${prioLabel}</span></td></tr>`;
-});
 
 // 7. Radar — 2 periods
 const rLabels=['Fac. & Maint.','Equans Digital','Industry & Infra','Carbon Shift','ET-campagne'];
