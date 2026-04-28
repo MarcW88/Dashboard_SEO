@@ -749,7 +749,7 @@ const qt=document.getElementById('queryTable');
 let qTotImpr=0,qTotClicks=0;
 queryData.forEach(d=>{
   qTotImpr+=d.impr;qTotClicks+=d.clicks;
-  const trackedBadge=d.tracked?'<span style="background:#ecfdf5;color:#059669;font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px">Yes</span>':'<span style="background:#f3f4f6;color:#9ca3af;font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px">No</span>';
+  const trackedBadge=d.tracked?'<span style="background:#ecfdf5;color:#059669;font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px">Yes</span>':'<span style="background:#fef2f2;color:#ef4444;font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px">Not tracked</span>';
   const posSemCell=d.posSem!==null?`<td style="text-align:right;font-weight:600">${d.posSem}</td>`:'<td style="text-align:right;color:#d1d5db">—</td>';
   const posColor=d.posGSC<=3?'#059669':d.posGSC<=10?'#111827':d.posGSC<=20?'#d97706':'#ef4444';
   qt.innerHTML+=`<tr><td>${d.q}</td><td style="text-align:center">${trackedBadge}</td><td style="text-align:right;color:${posColor};font-weight:600">${d.posGSC.toFixed(1)}</td>${posSemCell}<td style="text-align:right">${d.impr.toLocaleString()}</td>${deltaCell(d.dImpr)}<td style="text-align:right">${d.clicks.toLocaleString()}</td>${deltaCell(d.dClicks)}</tr>`;
