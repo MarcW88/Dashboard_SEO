@@ -203,7 +203,7 @@
     </div>
   </div>
 
-  <!-- 3. TOP 15 ORGANIC COMPETITORS -->
+  <!-- 3. TOP 15 ORGANIC COMPETITORS — ranked list -->
   <div class="card" style="padding:14px 16px">
     <div class="card-hdr">
       <div>
@@ -215,15 +215,7 @@
         <button class="btn-or">Select</button>
       </div>
     </div>
-    <div class="g32" style="margin:0">
-      <div>
-        <div class="card-sub" style="margin-bottom:6px;text-align:center">Number of Competitor pages on the same keywords</div>
-        <div style="height:280px"><canvas id="chartPresenceBar"></canvas></div>
-      </div>
-      <div style="display:flex;align-items:center;justify-content:center">
-        <canvas id="chartPresenceDonut" height="200"></canvas>
-      </div>
-    </div>
+    <div id="competitorRanking"></div>
   </div>
 
   <!-- 4. VISIBILITY TREND -->
@@ -501,7 +493,7 @@ const labelData = [
 // TAB 1 — OVERVIEW
 // ══════════════════════════════════════════
 
-// 0. Top 15 Organic Competitors — presence on tracked keywords
+// 0. Top 15 Organic Competitors — ranked list with progress bars
 const compColors=['#9b87f5','#fb7185','#7dd3fc','#34d399','#fbbf24','#a78bfa','#f472b6','#38bdf8','#4ade80','#facc15','#c084fc','#fb923c','#67e8f9','#86efac','#fda4af'];
 const presenceData = [
   {name:'vlaanderen.be',kw:147},{name:'vlao.be',kw:97},{name:'nl.wikipedia.org',kw:92},
@@ -512,24 +504,25 @@ const presenceData = [
   {name:'fluvius.be',kw:29},
 ];
 presenceData.forEach((d,i)=>d.color=compColors[i%compColors.length]);
-new Chart(document.getElementById('chartPresenceBar'),{
-  type:'bar',
-  data:{labels:presenceData.map(c=>c.name),datasets:[{data:presenceData.map(c=>c.kw),backgroundColor:presenceData.map(c=>c.color),borderRadius:2,barPercentage:.45,categoryPercentage:.92}]},
-  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
-    plugins:{legend:{display:false},datalabels:{display:true,anchor:'end',align:'right',color:'#555',font:{size:9,weight:'bold'},formatter:v=>v}},
-    scales:{x:{ticks:{font:{size:9}},grid:{color:'#f3f4f6'}},y:{ticks:{font:{size:9,weight:'600'},padding:1},grid:{display:false}}}
-  },plugins:[ChartDataLabels]
-});
+const maxKw=Math.max(...presenceData.map(d=>d.kw));
 const totalP=presenceData.reduce((s,d)=>s+d.kw,0);
-new Chart(document.getElementById('chartPresenceDonut'),{
-  type:'doughnut',
-  data:{labels:presenceData.map(d=>d.name),datasets:[{data:presenceData.map(d=>d.kw),backgroundColor:presenceData.map(d=>d.color),borderWidth:2,borderColor:'#ffffff'}]},
-  options:{cutout:'55%',plugins:{
-    legend:{position:'right',labels:{font:{size:9},boxWidth:8,padding:6,generateLabels:chart=>{
-      return chart.data.labels.map((l,i)=>{const d=presenceData[i];const pct=totalP?(d.kw/totalP*100).toFixed(1):'0';return{text:l+' ('+pct+'%)',fillStyle:d.color,strokeStyle:'#ffffff',lineWidth:2,index:i};});
-    }}},
-    datalabels:{display:ctx=>ctx.dataset.data[ctx.dataIndex]>0,color:'#fff',font:{size:11,weight:'bold'},formatter:(v)=>{const pct=totalP?(v/totalP*100).toFixed(1):'0';return pct+'%';}}
-  }},plugins:[ChartDataLabels]
+const cr=document.getElementById('competitorRanking');
+presenceData.forEach((d,i)=>{
+  const pct=(d.kw/totalP*100).toFixed(1);
+  const w=(d.kw/maxKw*100).toFixed(0);
+  const isEquans=d.name.toLowerCase()==='equans.be';
+  cr.innerHTML+=`<div style="display:grid;grid-template-columns:22px 1fr 46px 52px;gap:8px;align-items:center;padding:6px 0;${i>0?'border-top:1px solid #f3f4f6':''}">
+    <span style="font-size:10px;font-weight:700;color:#9ca3af;text-align:center">${i+1}</span>
+    <div>
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px">
+        <span style="font-size:12px;font-weight:${isEquans?'700':'500'};color:${isEquans?'#9b87f5':'#111827'}">${d.name}</span>
+        ${isEquans?'<span style="font-size:9px;font-weight:700;padding:1px 6px;border-radius:10px;background:#ede9fe;color:#7c3aed">YOU</span>':''}
+      </div>
+      <div style="height:4px;background:#f3f4f6;border-radius:99px"><div style="height:100%;width:${w}%;background:${d.color};border-radius:99px"></div></div>
+    </div>
+    <span style="font-size:12px;font-weight:700;color:#111827;text-align:right">${d.kw}</span>
+    <span style="font-size:10px;color:#6b7280;text-align:right">${pct}%</span>
+  </div>`;
 });
 
 // 1. Top 10 Coverage by Domain
