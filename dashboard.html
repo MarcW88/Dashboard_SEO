@@ -409,7 +409,7 @@
       </div>
     </div>
     <table>
-      <thead><tr><th>Query</th><th style="text-align:right">Impressions</th><th style="text-align:right">&Delta;</th><th style="text-align:right">Url Clicks</th><th style="text-align:right">&Delta;</th></tr></thead>
+      <thead><tr><th>Query</th><th style="text-align:center">Tracked</th><th style="text-align:right">Pos. GSC</th><th style="text-align:right">Pos. Semactic</th><th style="text-align:right">Impressions</th><th style="text-align:right">&Delta;</th><th style="text-align:right">Url Clicks</th><th style="text-align:right">&Delta;</th></tr></thead>
       <tbody id="queryTable"></tbody>
     </table>
     <div style="text-align:right;font-size:10px;color:#bbb;margin-top:8px">1-10 / 18,271</div>
@@ -734,24 +734,27 @@ catData.forEach(d=>{
 
 // 1.3 Query Table
 const queryData=[
-  {q:'equans belgium',impr:28400,dImpr:-12.1,clicks:824,dClicks:-18.5},
-  {q:'facility management belgium',impr:22100,dImpr:-15.8,clicks:385,dClicks:-32.4},
-  {q:'gebouwbeheer brussel',impr:18600,dImpr:-8.2,clicks:248,dClicks:-22.1},
-  {q:'building automation',impr:15200,dImpr:-28.4,clicks:195,dClicks:-41.8},
-  {q:'hvac onderhoud',impr:12800,dImpr:-5.6,clicks:186,dClicks:-14.2},
-  {q:'energietransitie bedrijven',impr:9400,dImpr:-35.2,clicks:124,dClicks:-48.6},
-  {q:'technisch gebouwbeheer',impr:8200,dImpr:-18.9,clicks:118,dClicks:-26.3},
-  {q:'warmtepomp installatie',impr:6800,dImpr:+12.4,clicks:98,dClicks:+8.2},
-  {q:'datacenter koeling',impr:4200,dImpr:-22.6,clicks:64,dClicks:-38.1},
-  {q:'smart building technology',impr:3600,dImpr:-14.8,clicks:42,dClicks:-25.5},
+  {q:'equans belgium',tracked:true,posGSC:2.1,posSem:1,impr:28400,dImpr:-12.1,clicks:824,dClicks:-18.5},
+  {q:'facility management belgium',tracked:true,posGSC:8.4,posSem:6,impr:22100,dImpr:-15.8,clicks:385,dClicks:-32.4},
+  {q:'gebouwbeheer brussel',tracked:true,posGSC:5.2,posSem:4,impr:18600,dImpr:-8.2,clicks:248,dClicks:-22.1},
+  {q:'building automation',tracked:true,posGSC:12.8,posSem:11,impr:15200,dImpr:-28.4,clicks:195,dClicks:-41.8},
+  {q:'hvac onderhoud',tracked:true,posGSC:6.1,posSem:5,impr:12800,dImpr:-5.6,clicks:186,dClicks:-14.2},
+  {q:'energietransitie bedrijven',tracked:true,posGSC:14.5,posSem:12,impr:9400,dImpr:-35.2,clicks:124,dClicks:-48.6},
+  {q:'technisch gebouwbeheer',tracked:true,posGSC:9.3,posSem:7,impr:8200,dImpr:-18.9,clicks:118,dClicks:-26.3},
+  {q:'warmtepomp installatie',tracked:false,posGSC:18.2,posSem:null,impr:6800,dImpr:+12.4,clicks:98,dClicks:+8.2},
+  {q:'datacenter koeling',tracked:false,posGSC:22.6,posSem:null,impr:4200,dImpr:-22.6,clicks:64,dClicks:-38.1},
+  {q:'smart building technology',tracked:false,posGSC:28.1,posSem:null,impr:3600,dImpr:-14.8,clicks:42,dClicks:-25.5},
 ];
 const qt=document.getElementById('queryTable');
 let qTotImpr=0,qTotClicks=0;
 queryData.forEach(d=>{
   qTotImpr+=d.impr;qTotClicks+=d.clicks;
-  qt.innerHTML+=`<tr><td>${d.q}</td><td style="text-align:right">${d.impr.toLocaleString()}</td>${deltaCell(d.dImpr)}<td style="text-align:right">${d.clicks.toLocaleString()}</td>${deltaCell(d.dClicks)}</tr>`;
+  const trackedBadge=d.tracked?'<span style="background:#ecfdf5;color:#059669;font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px">Yes</span>':'<span style="background:#f3f4f6;color:#9ca3af;font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px">No</span>';
+  const posSemCell=d.posSem!==null?`<td style="text-align:right;font-weight:600">${d.posSem}</td>`:'<td style="text-align:right;color:#d1d5db">—</td>';
+  const posColor=d.posGSC<=3?'#059669':d.posGSC<=10?'#111827':d.posGSC<=20?'#d97706':'#ef4444';
+  qt.innerHTML+=`<tr><td>${d.q}</td><td style="text-align:center">${trackedBadge}</td><td style="text-align:right;color:${posColor};font-weight:600">${d.posGSC.toFixed(1)}</td>${posSemCell}<td style="text-align:right">${d.impr.toLocaleString()}</td>${deltaCell(d.dImpr)}<td style="text-align:right">${d.clicks.toLocaleString()}</td>${deltaCell(d.dClicks)}</tr>`;
 });
-qt.innerHTML+=`<tr style="font-weight:700;border-top:2px solid #ddd"><td>Total général</td><td style="text-align:right">${qTotImpr.toLocaleString()}</td><td></td><td style="text-align:right">${qTotClicks.toLocaleString()}</td><td></td></tr>`;
+qt.innerHTML+=`<tr style="font-weight:700;border-top:2px solid #e5e7eb"><td>Total général</td><td></td><td></td><td></td><td style="text-align:right">${qTotImpr.toLocaleString()}</td><td></td><td style="text-align:right">${qTotClicks.toLocaleString()}</td><td></td></tr>`;
 
 // 1.4 Brand LP Table
 const brandLP=[
