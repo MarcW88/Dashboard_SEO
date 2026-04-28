@@ -331,34 +331,58 @@
 <div id="tab-data" class="tab-content">
 <div class="content">
 
+  <!-- ═══ 4 KPI CARDS (same style as Overview) ═══ -->
+  <div class="kpi-row">
+    <div class="kpi-card">
+      <span class="ci">&#9432;<span class="tip">Total impressions from Google Search Console over the selected period.</span></span>
+      <div class="kpi-label">Impressions</div>
+      <div class="kpi-val">374,363</div>
+      <div class="kpi-cmp"><span class="dn">&#9660; -21.7%</span> vs previous period</div>
+    </div>
+    <div class="kpi-card">
+      <span class="ci">&#9432;<span class="tip">Total URL clicks from Google Search Console over the selected period.</span></span>
+      <div class="kpi-label">Url Clicks</div>
+      <div class="kpi-val accent">3,436</div>
+      <div class="kpi-cmp"><span class="dn">&#9660; -38.6%</span> vs previous period</div>
+    </div>
+    <div class="kpi-card">
+      <span class="ci">&#9432;<span class="tip">Organic sessions from Google Analytics 4 over the selected period.</span></span>
+      <div class="kpi-label">Organic Sessions</div>
+      <div class="kpi-val">4,655</div>
+      <div class="kpi-cmp"><span class="up">&#9650; +4.2%</span> vs previous period</div>
+    </div>
+    <div class="kpi-card">
+      <span class="ci">&#9432;<span class="tip">Organic conversions (goal completions) from GA4 over the selected period.</span></span>
+      <div class="kpi-label">Conversions</div>
+      <div class="kpi-val">284</div>
+      <div class="kpi-cmp"><span class="up">&#9650; +22%</span> vs previous period</div>
+    </div>
+  </div>
+
   <!-- ═══ SECTION 1 : GSC ═══ -->
   <div class="section-sep">Google Search Console — Evolution du trafic générique</div>
 
-  <!-- 1.1 Line Chart + 2 dark KPI cards -->
+  <!-- 1.1 Line Chart — Clicks & Impressions with toggle -->
   <div class="card">
     <div class="card-hdr">
       <div>
-        <div class="card-title">Url Clicks — Trend</div>
-        <div class="card-sub">Current period vs previous year (dotted)</div>
+        <div class="card-title">Clicks &amp; Impressions — Trend</div>
+        <div class="card-sub">Current period vs previous year (dotted) — toggle metrics below</div>
       </div>
       <div style="display:flex;gap:8px;align-items:center">
         <select class="sel"><option>Last 8 weeks</option></select>
       </div>
     </div>
+    <div style="display:flex;gap:16px;margin-bottom:10px">
+      <label style="display:flex;align-items:center;gap:4px;font-size:11px;font-weight:600;color:#111827;cursor:pointer">
+        <input type="checkbox" id="togClicks" checked style="accent-color:#9b87f5"> Url Clicks
+      </label>
+      <label style="display:flex;align-items:center;gap:4px;font-size:11px;font-weight:600;color:#111827;cursor:pointer">
+        <input type="checkbox" id="togImpr" checked style="accent-color:#34d399"> Impressions
+      </label>
+    </div>
     <div class="legend-row" id="gscTrendLeg"></div>
     <canvas id="chartGSCtrend" height="80"></canvas>
-  </div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
-    <div style="background:#2d2d2d;border-radius:10px;padding:18px 20px">
-      <div style="font-size:10px;font-weight:600;color:#999;text-transform:uppercase;letter-spacing:.3px;margin-bottom:6px">Impressions</div>
-      <div style="font-size:28px;font-weight:800;color:#fff">374,363</div>
-      <div style="font-size:11px;color:#fb7185;font-weight:600;margin-top:4px">&#9660; -21.7%</div>
-    </div>
-    <div style="background:#2d2d2d;border-radius:10px;padding:18px 20px">
-      <div style="font-size:10px;font-weight:600;color:#999;text-transform:uppercase;letter-spacing:.3px;margin-bottom:6px">Url Clicks</div>
-      <div style="font-size:28px;font-weight:800;color:#fff">3,436</div>
-      <div style="font-size:11px;color:#fb7185;font-weight:600;margin-top:4px">&#9660; -38.6%</div>
-    </div>
   </div>
 
   <!-- 1.2 Category Table -->
@@ -393,15 +417,15 @@
 
   <!-- 1.4 Brand Cards + Landing Page Table -->
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
-    <div style="background:#2d2d2d;border-radius:10px;padding:18px 20px">
-      <div style="font-size:10px;font-weight:600;color:#999;text-transform:uppercase;letter-spacing:.3px;margin-bottom:6px">Branded Clicks</div>
-      <div style="font-size:28px;font-weight:800;color:#fff">413</div>
-      <div style="font-size:11px;color:#fb7185;font-weight:600;margin-top:4px">&#9660; -64.5%</div>
+    <div class="kpi-card" style="text-align:center">
+      <div class="kpi-label">Branded Clicks</div>
+      <div class="kpi-val" style="font-size:22px">413</div>
+      <div class="kpi-cmp"><span class="dn">&#9660; -64.5%</span></div>
     </div>
-    <div style="background:#2d2d2d;border-radius:10px;padding:18px 20px">
-      <div style="font-size:10px;font-weight:600;color:#999;text-transform:uppercase;letter-spacing:.3px;margin-bottom:6px">Non-branded Clicks</div>
-      <div style="font-size:28px;font-weight:800;color:#fff">759</div>
-      <div style="font-size:11px;color:#fb7185;font-weight:600;margin-top:4px">&#9660; -50.5%</div>
+    <div class="kpi-card" style="text-align:center">
+      <div class="kpi-label">Non-branded Clicks</div>
+      <div class="kpi-val" style="font-size:22px">759</div>
+      <div class="kpi-cmp"><span class="dn">&#9660; -50.5%</span></div>
     </div>
   </div>
   <div class="card">
@@ -421,24 +445,15 @@
   <!-- ═══ SECTION 2 : GA4 ═══ -->
   <div class="section-sep">Google Analytics 4 — Evolution des sessions organiques</div>
 
-  <!-- 2.1 Bar Chart + KPI Card -->
-  <div class="g2">
-    <div class="card" style="margin:0">
-      <div class="card-hdr">
-        <div>
-          <div class="card-title">Organic Sessions — Year over Year</div>
-          <div class="card-sub">Monthly comparison: current vs previous year</div>
-        </div>
-      </div>
-      <canvas id="chartGA4bar" height="100"></canvas>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:12px">
-      <div style="background:#2d2d2d;border-radius:10px;padding:18px 20px;flex:1;display:flex;flex-direction:column;justify-content:center">
-        <div style="font-size:10px;font-weight:600;color:#999;text-transform:uppercase;letter-spacing:.3px;margin-bottom:6px">Organic Sessions</div>
-        <div style="font-size:32px;font-weight:800;color:#fff">4,655</div>
-        <div style="font-size:11px;color:#34d399;font-weight:600;margin-top:4px">&#9650; +4.2%</div>
+  <!-- 2.1 Bar Chart -->
+  <div class="card">
+    <div class="card-hdr">
+      <div>
+        <div class="card-title">Organic Sessions — Year over Year</div>
+        <div class="card-sub">Monthly comparison: current vs previous year</div>
       </div>
     </div>
+    <canvas id="chartGA4bar" height="100"></canvas>
   </div>
 
   <!-- 2.2 Top Landing Pages -->
@@ -665,19 +680,39 @@ function deltaCell(v){
   return `<td style="text-align:right;color:${col};font-weight:600">${arr} ${v>0?'+':''}${v.toFixed(1)}%</td>`;
 }
 
-// 1.1 GSC Line Chart — Url Clicks current vs previous year
+// 1.1 GSC Line Chart — Clicks & Impressions (dual Y)
 const gscWeeks=['1 Mar','8 Mar','15 Mar','22 Mar','29 Mar','5 Apr','12 Apr','19 Apr','25 Apr'];
-const gscCurrent=[120,135,148,110,165,142,128,155,98];
-const gscPrev=[180,195,172,210,188,205,192,178,160];
+const gscClicks=[120,135,148,110,165,142,128,155,98];
+const gscClicksPrev=[180,195,172,210,188,205,192,178,160];
+const gscImpr=[38200,42100,45800,36500,48200,41600,39800,46100,32400];
+const gscImprPrev=[52400,54800,48600,58200,51200,55800,53400,49600,46800];
 const gscLeg=document.getElementById('gscTrendLeg');
-gscLeg.innerHTML=`<span><span class="ldot" style="background:${C.violet}"></span>Url Clicks — current</span><span><span class="ldot" style="background:#d1d5db"></span>Url Clicks — previous year</span>`;
-new Chart(document.getElementById('chartGSCtrend'),{
+gscLeg.innerHTML=`<span><span class="ldot" style="background:${C.violet}"></span>Clicks</span><span><span class="ldot" style="background:rgba(155,135,245,.35)"></span>Clicks prev.</span><span><span class="ldot" style="background:${C.green}"></span>Impressions</span><span><span class="ldot" style="background:rgba(52,211,153,.35)"></span>Impr. prev.</span>`;
+const gscChart=new Chart(document.getElementById('chartGSCtrend'),{
   type:'line',
   data:{labels:gscWeeks,datasets:[
-    {label:'Current',data:gscCurrent,borderColor:C.violet,backgroundColor:'rgba(155,135,245,.06)',borderWidth:2.5,tension:.4,pointRadius:2,fill:true},
-    {label:'Previous year',data:gscPrev,borderColor:'#d1d5db',borderWidth:2,tension:.4,pointRadius:2,borderDash:[4,3],fill:false},
+    {label:'Clicks',data:gscClicks,borderColor:C.violet,backgroundColor:'rgba(155,135,245,.06)',borderWidth:2.5,tension:.4,pointRadius:2,fill:true,yAxisID:'y'},
+    {label:'Clicks prev.',data:gscClicksPrev,borderColor:'rgba(155,135,245,.35)',borderWidth:1.5,tension:.4,pointRadius:1,borderDash:[4,3],fill:false,yAxisID:'y'},
+    {label:'Impressions',data:gscImpr,borderColor:C.green,backgroundColor:'rgba(52,211,153,.06)',borderWidth:2.5,tension:.4,pointRadius:2,fill:true,yAxisID:'y1'},
+    {label:'Impr. prev.',data:gscImprPrev,borderColor:'rgba(52,211,153,.35)',borderWidth:1.5,tension:.4,pointRadius:1,borderDash:[4,3],fill:false,yAxisID:'y1'},
   ]},
-  options:{plugins:{legend:{display:false},datalabels:{display:false}},scales:{y:{ticks:{font:{size:9}},grid:{color:'#f3f4f6'}},x:{ticks:{font:{size:9}},grid:{display:false}}}}
+  options:{plugins:{legend:{display:false},datalabels:{display:false}},
+    scales:{
+      y:{type:'linear',position:'left',ticks:{font:{size:9},color:C.violet},grid:{color:'#f3f4f6'},title:{display:true,text:'Clicks',font:{size:10},color:C.violet}},
+      y1:{type:'linear',position:'right',ticks:{font:{size:9},color:C.green,callback:v=>v>=1000?(v/1000).toFixed(0)+'K':v},grid:{display:false},title:{display:true,text:'Impressions',font:{size:10},color:C.green}},
+      x:{ticks:{font:{size:9}},grid:{display:false}}
+    }}
+});
+// Toggle clicks / impressions
+document.getElementById('togClicks').addEventListener('change',function(){
+  gscChart.data.datasets[0].hidden=!this.checked;
+  gscChart.data.datasets[1].hidden=!this.checked;
+  gscChart.update();
+});
+document.getElementById('togImpr').addEventListener('change',function(){
+  gscChart.data.datasets[2].hidden=!this.checked;
+  gscChart.data.datasets[3].hidden=!this.checked;
+  gscChart.update();
 });
 
 // 1.2 Category Table
